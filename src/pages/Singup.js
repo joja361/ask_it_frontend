@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,9 @@ function Singup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, isAuthenticated, error } = useSelector(authData);
+  const data = useSelector(authData);
+
+  console.log(data);
 
   const { signup: errorSignUp } = error;
 
@@ -32,16 +35,21 @@ function Singup() {
       .required("Field must be entered"),
   });
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     const { email, password, confirmPassword, name } = values;
-    dispatch(signupUser(email, password, confirmPassword, name));
+    try {
+      await dispatch(signupUser(email, password, confirmPassword, name));
+      return navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <>
       <Row className="form-page-wrapper">
         <Col md={6} lg={8} className="d-none d-md-block">
-          <a href="https://www.freepik.com/vectors/man">
+          <a /*href="https://www.freepik.com/vectors/man"*/>
             <Col className="d-flex justify-content-center">
               <img src={image} className="login-img" alt="question" />
             </Col>

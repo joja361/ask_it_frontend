@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { mainUrl } from "../utils/axios";
 
-//check for this what to do with it
 let isAuth = Boolean(localStorage.getItem("authUser"));
 
 const initialState = {
@@ -18,48 +17,52 @@ const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
-    setLoading(state, action) {
-      return { ...state, ...action.payload };
+    setLoading(state) {
+      return { ...state, loading: true };
     },
-    signup(state, action) {
-      return { ...state, ...action.payload };
+    signup(state) {
+      return { ...state, loading: false };
+    },
+    login(state, action) {
+      return { ...state };
     },
     setError(state, action) {
-      return { ...state, ...action.payload };
+      return {
+        ...state,
+        isAuthenticated: false,
+        loading: false,
+        ...action.payload,
+      };
     },
   },
 });
 
 export const { actions, reducer: authReducer } = authSlice;
 
-export const { setLoading, setError, signup } = actions;
+export const { setLoading, setError, signup, login } = actions;
 
 export const authData = (store) => store.authStore;
 
 export const signupUser =
   (email, password, confirmPassword, name) => async (dispatch) => {
     try {
-      dispatch(
-        setLoading({
-          loading: true,
-          error: { signup: "" },
-        })
-      );
+      dispatch(setLoading());
       await mainUrl.post("/auth/signup", {
         email,
         password,
         confirmPassword,
         name,
       });
+      dispatch(signup());
+      return Promise.resolve();
     } catch (err) {
       dispatch(
         setError({
-          loading: false,
           error: {
             signup: err.response.data.message,
-            isAuthenticated: false,
           },
         })
       );
+      return Promise.reject();
     }
   };
