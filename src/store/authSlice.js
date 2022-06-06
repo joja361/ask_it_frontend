@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { mainUrl } from "../utils/axios";
+import { deleteToken, getToken, saveToken } from "../utils/token";
 
-let isAuth = Boolean(localStorage.getItem("authUser"));
+let isAuth = Boolean(getToken());
 
 const initialState = {
   loading: false,
-  user: null,
+  user: {},
   error: {
     login: "",
     signup: "",
@@ -24,7 +25,16 @@ const authSlice = createSlice({
       return { ...state, loading: false };
     },
     login(state, action) {
-      return { ...state };
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        user: { ...action.payload },
+      };
+    },
+    logout(state) {
+      deleteToken();
+      return { ...state, loading: false, isAuthenticated: false };
     },
     setError(state, action) {
       return {
@@ -39,7 +49,7 @@ const authSlice = createSlice({
 
 export const { actions, reducer: authReducer } = authSlice;
 
-export const { setLoading, setError, signup, login } = actions;
+export const { setLoading, setError, signup, login, logout } = actions;
 
 export const authData = (store) => store.authStore;
 
@@ -66,3 +76,26 @@ export const signupUser =
       return Promise.reject();
     }
   };
+
+export const loginUser = (email, password) => async (dispatch) => {
+  try {
+    dispatch(setLoading());
+    const { data } = await mainUrl.post("/auth/login", {
+      email,
+      password,
+    });
+    const { userId, token } = data;
+    saveToken(token);
+    dispatch(login({ email }));
+    return Promise.resolve();
+  } catch (err) {
+    dispatch(
+      setError({
+        error: {
+          login: err.response.data.message,
+        },
+      })
+    );
+    return Promise.reject();
+  }
+};

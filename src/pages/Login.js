@@ -1,18 +1,17 @@
+import { Form, Formik } from "formik";
 import React from "react";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authData } from "../store/authSlice";
 import * as Yup from "yup";
-import { Col, Row, Spinner } from "react-bootstrap";
 import image from "../asset/background.jpg";
-import { Form } from "formik";
 import InputField from "../components/InputField";
-import { Button } from "bootstrap";
+import { authData, loginUser } from "../store/authSlice";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, isAuthenticated, error } = useSelector(authData);
+  const { loading, error } = useSelector(authData);
 
   const { login: errorLogin } = error;
 
@@ -28,8 +27,14 @@ function Login() {
     password: Yup.string().required("You must enter password"),
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values) => {
+    const { email, password } = values;
+    try {
+      await dispatch(loginUser(email, password));
+      return navigate("/");
+    } catch (err) {
+      console.log(err); // you need to figur it out what can be here
+    }
   };
 
   return (

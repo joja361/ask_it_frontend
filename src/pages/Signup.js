@@ -8,13 +8,11 @@ import image from "../asset/background.jpg";
 import InputField from "../components/InputField";
 import { authData, signupUser } from "../store/authSlice";
 
-function Singup() {
+function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, isAuthenticated, error } = useSelector(authData);
+  const { loading, error } = useSelector(authData);
   const data = useSelector(authData);
-
-  console.log(data);
 
   const { signup: errorSignUp } = error;
 
@@ -105,4 +103,4 @@ function Singup() {
   );
 }
 
-export default Singup;
+export default Signup;
