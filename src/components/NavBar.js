@@ -2,15 +2,15 @@ import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../asset/Logo.jpg";
-import { logout } from "../store/authSlice";
+import { authData, logout } from "../store/authSlice";
 import Avatar from "./Avatar";
 
 function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAuthenticated = useSelector(
-    (store) => store.authStore.isAuthenticated
-  );
+  const { isAuthenticated, user } = useSelector(authData);
+
+  const { email } = user;
 
   const handleLogOut = () => {
     dispatch(logout());
@@ -43,7 +43,7 @@ function NavBar() {
               >
                 <div className="d-flex align-items-center ">
                   <div className="me-1">
-                    <Avatar size={20} />
+                    <Avatar size={20} user={email} />
                   </div>
                   <span className="align-self-center">Sign Out</span>
                 </div>

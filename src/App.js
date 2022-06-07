@@ -1,8 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AskQuestion from "./pages/AskQuestion";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import axios from "axios";
 
 export default function App() {
   return (
@@ -13,6 +15,7 @@ export default function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/questions/:id" />
         <Route path="/profile/:id" />
+        <Route path="/questions/ask" element={<AskQuestion />} />
       </Route>
     </Routes>
   );

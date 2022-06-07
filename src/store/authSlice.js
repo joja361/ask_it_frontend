@@ -6,12 +6,12 @@ import {
   saveTokenAndUser,
 } from "../utils/token";
 
-const { token } = getTokenAndUser();
+const { token, email } = getTokenAndUser();
 let isAuth = Boolean(token);
 
 const initialState = {
   loading: false,
-  user: {},
+  user: { email },
   error: {
     login: "",
     signup: "",
@@ -82,16 +82,16 @@ export const signupUser =
     }
   };
 
-export const loginUser = (email, password) => async (dispatch) => {
+export const loginUser = (loginEmail, password) => async (dispatch) => {
   try {
     dispatch(setLoading());
     const { data } = await mainUrl.post("/auth/login", {
-      email,
+      email: loginEmail,
       password,
     });
-    const { userId, token } = data;
+    const { userId, token, email, name } = data;
     saveTokenAndUser(token, email);
-    dispatch(login({ email }));
+    dispatch(login({ email, name }));
     return Promise.resolve();
   } catch (err) {
     dispatch(

@@ -1,19 +1,18 @@
 import { useEffect } from "react";
-import { Col, Row, Spinner, Button } from "react-bootstrap";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 import { getQuestions, questionsData } from "../../store/questionsSlice";
-import { Navigate, useNavigate } from "react-router-dom";
 import Avatar from "../Avatar";
 import QuestionLikeAndDislike from "./QuestionLikeAndDislike";
-import { LinkContainer } from "react-router-bootstrap";
 
 function QuestionList() {
   const dispatch = useDispatch();
   const { loading, questions, error } = useSelector(questionsData);
-  const navigate = useNavigate();
   const isAuthenticated = useSelector(
     (store) => store.authStore.isAuthenticated
   );
+  console.log(questions);
 
   useEffect(() => {
     dispatch(getQuestions());
@@ -36,8 +35,8 @@ function QuestionList() {
           <h1>All Questions</h1>
         </Col>
         <Col>
-          {/* THIS HERE NEED TO BE FIXED */}
-          <LinkContainer to={isAuthenticated ? "/login" : "/singup"}>
+          {/* FIXME: check is this ok, also make UI better */}
+          <LinkContainer to={isAuthenticated ? "/questions/ask" : "/login"}>
             <Button>Ask Question</Button>
           </LinkContainer>
         </Col>
@@ -51,7 +50,8 @@ function QuestionList() {
                 md={2}
                 className="d-flex align-items-center justify-content-center"
               >
-                <Avatar />
+                {/* TODO: When getting questions we also need to provide name or email of user.  */}
+                {/* <Avatar /> */}
               </Col>
               <Col md={10}>
                 <div className="m-0 user-created-time">
