@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import image from "../asset/background.jpg";
 import InputField from "../components/InputField";
+import NavAuth from "../components/NavAuth";
 import { authData, loginUser } from "../store/authSlice";
 
 function Login() {
@@ -33,12 +34,13 @@ function Login() {
       await dispatch(loginUser(email, password));
       return navigate("/");
     } catch (err) {
-      console.log(err); // you need to figur it out what can be here
+      errorLogin = "Something went wrong";
     }
   };
 
   return (
     <>
+      <NavAuth to="/signup" text="Don't have account?" linkText="Sign Up" />
       <Row className="form-page-wrapper">
         <Col md={6} lg={8} className="d-none d-md-block">
           <a /*href="https://www.freepik.com/vectors/man"*/>

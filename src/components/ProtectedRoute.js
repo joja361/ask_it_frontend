@@ -6,10 +6,6 @@ function ProtectedRoute({ children }) {
     (store) => store.authStore.isAuthenticated
   );
 
-  console.log("PROTECTED ROUTE");
-  console.log(children);
-  console.log(<Outlet />);
-
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }

@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import image from "../asset/background.jpg";
 import InputField from "../components/InputField";
+import NavAuth from "../components/NavAuth";
 import { authData, signupUser } from "../store/authSlice";
 
 function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, error } = useSelector(authData);
-  const data = useSelector(authData);
 
   const { signup: errorSignUp } = error;
 
@@ -45,6 +45,7 @@ function Signup() {
 
   return (
     <>
+      <NavAuth to="/login" text="Already have account?" linkText="Login" />
       <Row className="form-page-wrapper">
         <Col md={6} lg={8} className="d-none d-md-block">
           <a /*href="https://www.freepik.com/vectors/man"*/>

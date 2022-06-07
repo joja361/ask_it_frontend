@@ -11,7 +11,6 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/questions" />
         <Route path="/questions/:id" />
         <Route path="/profile/:id" />
       </Route>
