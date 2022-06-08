@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { getQuestions, questionsData } from "../../store/questionsSlice";
 import Avatar from "../Avatar";
 import QuestionLikeAndDislike from "./QuestionLikeAndDislike";
+import QuestionTime from "./QuestionTime";
 
 function QuestionList() {
   const dispatch = useDispatch();
@@ -12,7 +14,6 @@ function QuestionList() {
   const isAuthenticated = useSelector(
     (store) => store.authStore.isAuthenticated
   );
-  console.log(questions);
 
   useEffect(() => {
     dispatch(getQuestions());
@@ -30,42 +31,44 @@ function QuestionList() {
 
   return (
     <>
+      {/* TODO: I am repeating className question-wrapper and mx-auto try to find better solution */}
       <Row>
-        <Col className="ms-auto">
-          <h1>All Questions</h1>
-        </Col>
         <Col>
-          {/* FIXME: check is this ok, also make UI better */}
+          <h2>All Questions</h2>
+        </Col>
+        <Col xs="auto">
           <LinkContainer to={isAuthenticated ? "/questions/ask" : "/login"}>
             <Button>Ask Question</Button>
           </LinkContainer>
         </Col>
       </Row>
       {questions.map((questionData, i) => {
-        const { name, question, created } = questionData;
+        const { name, email, question, description, created } = questionData;
         return (
-          <div key={i} className="border-bottom p-3 question-wrapper">
+          <div key={i} className="border-bottom py-2 question-item">
             <Row>
               <Col
                 md={2}
                 className="d-flex align-items-center justify-content-center"
               >
-                {/* TODO: When getting questions we also need to provide name or email of user.  */}
-                {/* <Avatar /> */}
+                <Avatar size={40} user={name || email} />
               </Col>
               <Col md={10}>
                 <div className="m-0 user-created-time">
-                  created at
-                  {/* created at <QuestionTime time={createdAt} /> */}
+                  asked <QuestionTime created={created} /> ago
                 </div>
-                <h3 className="m-0">{question}</h3>
+                <Link to={`/questions/${i}`} className="question-link">
+                  <h5 className="m-0 question">{question}</h5>
+                </Link>
               </Col>
             </Row>
             <Row className="py-2">
-              <Col md={2}>
+              <Col md={2} className="d-flex align-items-center">
                 <QuestionLikeAndDislike />
               </Col>
-              {/* <Col md={10}>{description}</Col> */}
+              <Col md={10} className="description">
+                {description}
+              </Col>
             </Row>
           </div>
         );

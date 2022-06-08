@@ -43,14 +43,17 @@ function NavBar() {
               >
                 <div className="d-flex align-items-center ">
                   <div className="me-1">
-                    <Avatar size={20} user={email} />
+                    <Avatar size={20} user={email} useFor="navbar" />
                   </div>
                   <span className="align-self-center">Sign Out</span>
                 </div>
               </Nav.Link>
             </Nav>
             <Nav className="align-items-center d-none d-sm-block">
-              <NavDropdown title={<Avatar />} id="nav-dropdown">
+              <NavDropdown
+                title={<Avatar user={email} useFor="navbar" />}
+                id="nav-dropdown"
+              >
                 <NavDropdown.Item as={NavLink} to="/my-profile">
                   My Profile
                 </NavDropdown.Item>

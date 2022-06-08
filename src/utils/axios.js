@@ -7,11 +7,11 @@ const newURL = "https://7afd-37-208-36-133.eu.ngrok.io";
 const { token } = getTokenAndUser();
 
 export const mainUrl = axios.create({
-  baseURL: URL,
+  baseURL: newURL,
 });
 
 export const authUrl = axios.create({
-  baseURL: URL,
+  baseURL: newURL,
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   },

@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <NavBar />
-      <Container>
+      <Container className="py-3 mx-auto question-wrapper">
         <QuestionList />
       </Container>
     </>

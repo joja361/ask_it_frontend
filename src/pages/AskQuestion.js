@@ -1,10 +1,10 @@
 import { Field, Formik } from "formik";
+import { Button, Container, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 import InputField from "../components/InputField";
 import NavBar from "../components/NavBar";
-import * as Yup from "yup";
-import { Form, Button, Container } from "react-bootstrap";
-import { authUrl, mainUrl } from "../utils/axios";
-import { useNavigate } from "react-router-dom";
+import { mainUrl } from "../utils/axios";
 
 export default function AskQuestion() {
   const navigate = useNavigate();
@@ -27,7 +27,6 @@ export default function AskQuestion() {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-      await authUrl.post();
       return navigate("/");
     } catch (error) {
       // TODO: handle this error right way

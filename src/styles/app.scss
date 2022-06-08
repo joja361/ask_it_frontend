@@ -214,9 +214,35 @@ $dark-gray: #8f8f8f;
   max-width: 850px;
 }
 
+.question-link {
+  text-decoration: none;
+}
+
+.question {
+  font-weight: 400;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
 .user-created-time {
   font-size: 0.8rem;
   color: $dark-gray;
+}
+
+.like,
+.dislike {
+  height: 26px;
+  width: 26px;
+  color: $dark-gray;
+  cursor: pointer;
+  font-weight: 100;
+  stroke-width: 0.1px;
 }
 
 .user-like-dislike-comment {

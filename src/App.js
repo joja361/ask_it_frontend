@@ -4,7 +4,6 @@ import AskQuestion from "./pages/AskQuestion";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import axios from "axios";
 
 export default function App() {
   return (

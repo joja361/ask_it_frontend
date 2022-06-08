@@ -1,0 +1,4 @@
+/questions?last=20 - treba da nam vrati i question_id kako bi mogli rutirati na bas to pitanje
+
+Nakon sto zavrsimo gore navedeno treba da komponentu Question List updatujemo sa question id umjesto trenutno indexa iz map funkcije
+
