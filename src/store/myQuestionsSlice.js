@@ -36,7 +36,7 @@ export const myQuestionsData = (store) => store.myQuestionsStore;
 export const getMyQuestions = (userId) => async (dispatch) => {
   dispatch(fetchMyQuestionsBegin());
   try {
-    const { data } = await mainUrl(`/questions/${userId}?last=20`, {
+    const { data } = await mainUrl(`/user/${userId}?tab=myQuestions`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }); // we need parameter for pages or questions to be listed so we can have load more question option
     console.log(data);

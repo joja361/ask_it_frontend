@@ -16,7 +16,7 @@ export default function App() {
       <Route element={<ProtectedRoute />}>
         {/* <Route path="/questions/:id" /> */}
         <Route path="/test" element={<Test />} />
-        <Route path="/questions/:userId" element={<MyQuestions />} />
+        <Route path="/user/:userId" element={<MyQuestions />} />
         <Route path="/questions/ask" element={<AskQuestion />} />
         <Route path="/profile/:id" />
       </Route>

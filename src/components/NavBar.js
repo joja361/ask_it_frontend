@@ -29,7 +29,7 @@ function NavBar() {
         {isAuthenticated && (
           <Navbar.Collapse id="navbar">
             <Nav className="me-auto">
-              <Nav.Link as={NavLink} to={`/questions/${userId}`}>
+              <Nav.Link as={NavLink} to={`/user/${userId}?tab=myQuestions`}>
                 My Questions
               </Nav.Link>
               <Nav.Link as={NavLink} to="/my-profile" className="d-sm-none">

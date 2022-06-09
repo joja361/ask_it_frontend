@@ -9,7 +9,7 @@ import { getMyQuestions, myQuestionsData } from "../store/myQuestionsSlice";
 
 export default function MyQuestions() {
   const dispatch = useDispatch();
-  const { loading, questions, error } = useSelector(myQuestionsData);
+  const { loading, myQuestions, error } = useSelector(myQuestionsData);
   const { isAuthenticated, user } = useSelector(authData);
 
   const { email, userId } = user;
@@ -25,14 +25,13 @@ export default function MyQuestions() {
       size="lg"
     />
   ) : (
-    <QuestionList questions={questions} />
+    <QuestionList questions={myQuestions} />
   );
 
   return (
     <>
       <NavBar />
-      <div className="">test</div>
-      {/* <Container className="py-3 mx-auto question-wrapper">
+      <Container className="py-3 mx-auto question-wrapper">
         <Row>
           <Col>
             <h2>My Questions</h2>
@@ -44,7 +43,7 @@ export default function MyQuestions() {
           </Col>
         </Row>
         {loadingOrQuestions}
-      </Container> */}
+      </Container>
     </>
   );
 }

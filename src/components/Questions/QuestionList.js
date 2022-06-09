@@ -8,7 +8,7 @@ function QuestionList({ questions }) {
   return (
     <>
       {questions.map((questionData, i) => {
-        const { id, name, email, question, description, created } =
+        const { id, name, email, question, description, created_at } =
           questionData;
         return (
           <div key={id} className="border-bottom py-2 question-item">
@@ -21,7 +21,7 @@ function QuestionList({ questions }) {
               </Col>
               <Col md={10}>
                 <div className="m-0 user-created-time">
-                  asked <QuestionTime created={created} /> ago
+                  asked <QuestionTime created={created_at} /> ago
                 </div>
                 <Link to={`/questions/${id}`} className="question-link">
                   <h5 className="m-0 question">{question}</h5>
