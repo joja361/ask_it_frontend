@@ -1,10 +1,7 @@
 import axios from "axios";
-import { getTokenAndUser } from "./token";
 
 const URL = "http://localhost:5000";
-const newURL = "https://7afd-37-208-36-133.eu.ngrok.io";
-
-const { token } = getTokenAndUser();
+const newURL = "https://0d91-37-208-36-133.eu.ngrok.io";
 
 export const mainUrl = axios.create({
   baseURL: newURL,

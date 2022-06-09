@@ -1,51 +1,17 @@
-import { useEffect } from "react";
-import { Button, Col, Row, Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { LinkContainer } from "react-router-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { getQuestions, questionsData } from "../../store/questionsSlice";
 import Avatar from "../Avatar";
 import QuestionLikeAndDislike from "./QuestionLikeAndDislike";
 import QuestionTime from "./QuestionTime";
 
-function QuestionList() {
-  const dispatch = useDispatch();
-  const { loading, questions, error } = useSelector(questionsData);
-  const isAuthenticated = useSelector(
-    (store) => store.authStore.isAuthenticated
-  );
-
-  useEffect(() => {
-    dispatch(getQuestions());
-  }, []);
-
-  if (loading) {
-    return (
-      <Spinner
-        className="d-block mx-auto spinner-grow-empty-page"
-        animation="grow"
-        size="lg"
-      />
-    );
-  }
-
+function QuestionList({ questions }) {
   return (
     <>
-      {/* TODO: I am repeating className question-wrapper and mx-auto try to find better solution */}
-      <Row>
-        <Col>
-          <h2>All Questions</h2>
-        </Col>
-        <Col xs="auto">
-          <LinkContainer to={isAuthenticated ? "/questions/ask" : "/login"}>
-            <Button>Ask Question</Button>
-          </LinkContainer>
-        </Col>
-      </Row>
       {questions.map((questionData, i) => {
-        const { name, email, question, description, created } = questionData;
+        const { id, name, email, question, description, created } =
+          questionData;
         return (
-          <div key={i} className="border-bottom py-2 question-item">
+          <div key={id} className="border-bottom py-2 question-item">
             <Row>
               <Col
                 md={2}
@@ -57,7 +23,7 @@ function QuestionList() {
                 <div className="m-0 user-created-time">
                   asked <QuestionTime created={created} /> ago
                 </div>
-                <Link to={`/questions/${i}`} className="question-link">
+                <Link to={`/questions/${id}`} className="question-link">
                   <h5 className="m-0 question">{question}</h5>
                 </Link>
               </Col>

@@ -4,17 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import NavBar from "../components/NavBar";
 import QuestionList from "../components/Questions/QuestionList";
-import { getQuestions, questionsData } from "../store/questionsSlice";
+import { authData } from "../store/authSlice";
+import { getMyQuestions, myQuestionsData } from "../store/myQuestionsSlice";
 
-export default function Home() {
+export default function MyQuestions() {
   const dispatch = useDispatch();
-  const { loading, questions, error } = useSelector(questionsData);
-  const isAuthenticated = useSelector(
-    (store) => store.authStore.isAuthenticated
-  );
+  const { loading, questions, error } = useSelector(myQuestionsData);
+  const { isAuthenticated, user } = useSelector(authData);
+
+  const { email, userId } = user;
 
   useEffect(() => {
-    dispatch(getQuestions());
+    dispatch(getMyQuestions(userId));
   }, []);
 
   const loadingOrQuestions = loading ? (
@@ -30,10 +31,11 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <Container className="py-3 mx-auto question-wrapper">
+      <div className="">test</div>
+      {/* <Container className="py-3 mx-auto question-wrapper">
         <Row>
           <Col>
-            <h2>All Questions</h2>
+            <h2>My Questions</h2>
           </Col>
           <Col xs="auto">
             <LinkContainer to={isAuthenticated ? "/questions/ask" : "/login"}>
@@ -42,7 +44,7 @@ export default function Home() {
           </Col>
         </Row>
         {loadingOrQuestions}
-      </Container>
+      </Container> */}
     </>
   );
 }

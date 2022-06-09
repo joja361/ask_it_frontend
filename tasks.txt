@@ -1,4 +1,9 @@
-/questions?last=20 - treba da nam vrati i question_id kako bi mogli rutirati na bas to pitanje
+/questions?last=20 - treba da nam vrati i question_id kako bi mogli rutirati na bas to pitanje // ZAVRSENO
 
-Nakon sto zavrsimo gore navedeno treba da komponentu Question List updatujemo sa question id umjesto trenutno indexa iz map funkcije
+Nakon sto zavrsimo gore navedeno treba da komponentu Question List updatujemo sa question id umjesto trenutno indexa iz map funkcije // ZAVRSENO
 
+TODO: /questions?last=20 - treba napraviti funkcionalnost sa load more funkcionalnosti, takodjer treba prosiriti stranicu sa ostalim trazenim stvarima
+
+TODO: HOMEPAGE -- errorhandeling need to be done
+
+FIXME: Provjeriti zasto `/questions/${userId}?last=20 ne radi ispravno

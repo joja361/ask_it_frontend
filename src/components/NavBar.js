@@ -10,7 +10,7 @@ function NavBar() {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector(authData);
 
-  const { email } = user;
+  const { email, userId } = user;
 
   const handleLogOut = () => {
     dispatch(logout());
@@ -29,7 +29,7 @@ function NavBar() {
         {isAuthenticated && (
           <Navbar.Collapse id="navbar">
             <Nav className="me-auto">
-              <Nav.Link as={NavLink} to="/my-questions">
+              <Nav.Link as={NavLink} to={`/questions/${userId}`}>
                 My Questions
               </Nav.Link>
               <Nav.Link as={NavLink} to="/my-profile" className="d-sm-none">

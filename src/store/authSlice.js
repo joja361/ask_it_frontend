@@ -1,17 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { mainUrl } from "../utils/axios";
-import {
-  deleteTokenAndUser,
-  getTokenAndUser,
-  saveTokenAndUser,
-} from "../utils/token";
+import { deleteUserData, getUserData, saveUserData } from "../utils/token";
 
-const { token, email } = getTokenAndUser();
+const { token, email, userId } = getUserData();
 let isAuth = Boolean(token);
 
 const initialState = {
   loading: false,
-  user: { email },
+  user: { email, userId },
   error: {
     login: "",
     signup: "",
@@ -38,7 +34,7 @@ const authSlice = createSlice({
       };
     },
     logout(state) {
-      deleteTokenAndUser();
+      deleteUserData();
       return { ...state, loading: false, isAuthenticated: false };
     },
     setError(state, action) {
@@ -90,8 +86,8 @@ export const loginUser = (loginEmail, password) => async (dispatch) => {
       password,
     });
     const { userId, token, email, name } = data;
-    saveTokenAndUser(token, email);
-    dispatch(login({ email, name }));
+    saveUserData(token, email, userId);
+    dispatch(login({ email, name, userId }));
     return Promise.resolve();
   } catch (err) {
     dispatch(

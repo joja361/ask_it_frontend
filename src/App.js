@@ -3,7 +3,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AskQuestion from "./pages/AskQuestion";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import MyQuestions from "./pages/MyQuestions";
 import Signup from "./pages/Signup";
+import Test from "./Test";
 
 export default function App() {
   return (
@@ -12,9 +14,11 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/questions/:id" />
-        <Route path="/profile/:id" />
+        {/* <Route path="/questions/:id" /> */}
+        <Route path="/test" element={<Test />} />
+        <Route path="/questions/:userId" element={<MyQuestions />} />
         <Route path="/questions/ask" element={<AskQuestion />} />
+        <Route path="/profile/:id" />
       </Route>
     </Routes>
   );
