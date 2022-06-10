@@ -6,4 +6,8 @@ TODO: /questions?last=20 - treba napraviti funkcionalnost sa load more funkciona
 
 TODO: HOMEPAGE -- errorhandeling need to be done
 
-FIXME: Provjeriti zasto `/questions/${userId}?last=20 ne radi ispravno
+Provjeriti zasto `/questions/${userId}?last=20 ne radi ispravno // ZAVRSENO napravljen novi route '/user/${userId}?last=20
+
+FIXME: we need to fix backend for getQuestion since somehow that route is also looking for user_id which is not correct, exclude user_id from request
+
+TODO: question/id ne treba da bude u privateRoute samo treba da postoji mogucnost dodavanja responsa ukoliko je user auth.

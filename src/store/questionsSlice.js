@@ -23,7 +23,7 @@ const questionsSlice = createSlice({
   },
 });
 
-export const { reducer: questionReducer, actions } = questionsSlice;
+export const { reducer: questionsReducer, actions } = questionsSlice;
 
 export const {
   fetchQuestionsBegin,

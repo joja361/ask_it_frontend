@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import Loading from "../components/Loading";
 import NavBar from "../components/NavBar";
 import QuestionList from "../components/Questions/QuestionList";
 import { getQuestions, questionsData } from "../store/questionsSlice";
@@ -13,16 +14,14 @@ export default function Home() {
     (store) => store.authStore.isAuthenticated
   );
 
+  console.log(questions);
+
   useEffect(() => {
     dispatch(getQuestions());
-  }, []);
+  }, [dispatch]);
 
   const loadingOrQuestions = loading ? (
-    <Spinner
-      className="d-block mx-auto spinner-grow-empty-page"
-      animation="grow"
-      size="lg"
-    />
+    <Loading />
   ) : (
     <QuestionList questions={questions} />
   );
