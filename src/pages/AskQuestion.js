@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import InputField from "../components/InputField";
 import NavBar from "../components/NavBar";
-import { mainUrl } from "../utils/axios";
+import TextArea from "../components/TextArea";
+import { mainUrl } from "../utils/axiosInstances";
 
 export default function AskQuestion() {
   const navigate = useNavigate();
@@ -15,18 +16,9 @@ export default function AskQuestion() {
 
   const onSubmit = async (values) => {
     const { question, description } = values;
+
     try {
-      // TODO: instance not working in case we create it in axios.js file since they are not updated properly
-      await mainUrl.post(
-        "/questions",
-        {
-          question,
-          description,
-        },
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
+      await mainUrl.post("/questions", { question, description });
       return navigate("/");
     } catch (error) {
       // TODO: handle this error right way
@@ -54,19 +46,7 @@ export default function AskQuestion() {
             return (
               <Form onSubmit={handleSubmit}>
                 <InputField label="Question" name="question" />
-                {/* TODO: improve textarea or make a component something like inputfield, also need to change error hand.*/}
-                <Field name="description">
-                  {({ field }) => {
-                    return (
-                      <textarea
-                        {...field}
-                        cols="30"
-                        rows="10"
-                        className="d-block w-100"
-                      ></textarea>
-                    );
-                  }}
-                </Field>
+                <TextArea label="Description" name="description" rows={10} />
                 <Button type="submit">Post your question</Button>
               </Form>
             );

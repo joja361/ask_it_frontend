@@ -6,7 +6,7 @@ import logo from "../asset/Logo.jpg";
 function NavAuth({ to = "/", text, linkText }) {
   return (
     <Container className="d-flex justify-content-between align-items-center">
-      <Link to="/">
+      <Link to="/" onClick={() => window.location.href("/")}>
         <Image src={logo} className="logo" />
       </Link>
       <div className="d-flex align-items-center">

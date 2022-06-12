@@ -21,7 +21,7 @@ function NavBar() {
     <Navbar className="p-0" expand="sm">
       <Container>
         <Navbar.Brand>
-          <Link to="/">
+          <Link to="/" onClick={() => window.location.href("/")}>
             <Image src={logo} className="logo" />
           </Link>
         </Navbar.Brand>

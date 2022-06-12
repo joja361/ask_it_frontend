@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { mainUrl } from "../utils/axios";
+import { mainUrl } from "../utils/axiosInstances";
 
 const initialState = {
   loading: false,
@@ -36,9 +36,7 @@ export const questionData = (store) => store.questionStore;
 export const getQuestion = (questionId) => async (dispatch) => {
   dispatch(fetchQuestionBegin());
   try {
-    const { data } = await mainUrl(`/questions/${questionId}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }); // we need parameter for pages or questions to be listed so we can have load more question option
+    const { data } = await mainUrl(`/questions/${questionId}`);
     return dispatch(fetchQuestionSuccess(data[0]));
   } catch (err) {
     console.log(err);

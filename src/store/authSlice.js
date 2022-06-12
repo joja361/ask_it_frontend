@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { mainUrl } from "../utils/axios";
+import { mainUrl } from "../utils/axiosInstances";
 import { deleteUserData, getUserData, saveUserData } from "../utils/token";
 
 const { token, email, userId } = getUserData();

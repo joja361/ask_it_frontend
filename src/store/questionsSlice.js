@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { mainUrl } from "../utils/axios";
+import { mainUrl } from "../utils/axiosInstances";
 
 const initialState = {
   loading: false,
@@ -15,7 +15,11 @@ const questionsSlice = createSlice({
       return { ...state, loading: true, error: "" };
     },
     fetchQuestionsSuccess(state, action) {
-      return { ...state, loading: false, questions: action.payload };
+      return {
+        ...state,
+        loading: false,
+        questions: [...state.questions, ...action.payload],
+      };
     },
     fetchQuestionsFailure(state, action) {
       return { ...state, loading: false, error: action.payload };
@@ -33,10 +37,10 @@ export const {
 
 export const questionsData = (store) => store.questionsStore;
 
-export const getQuestions = () => async (dispatch) => {
+export const getQuestions = (numOfQuestions) => async (dispatch) => {
   dispatch(fetchQuestionsBegin());
   try {
-    const { data } = await mainUrl("/questions?last=20"); // we need parameter for pages or questions to be listed so we can have load more question option
+    const { data } = await mainUrl(`/questions?last=${numOfQuestions}`);
     return dispatch(fetchQuestionsSuccess(data));
   } catch (err) {
     console.log(err);

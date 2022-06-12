@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
@@ -13,18 +13,15 @@ export default function Home() {
   const isAuthenticated = useSelector(
     (store) => store.authStore.isAuthenticated
   );
-
-  console.log(questions);
+  const [numOfQuestions, setNumOfQuestions] = useState(5);
 
   useEffect(() => {
-    dispatch(getQuestions());
-  }, [dispatch]);
+    dispatch(getQuestions(numOfQuestions));
+  }, [dispatch, numOfQuestions]);
 
-  const loadingOrQuestions = loading ? (
-    <Loading />
-  ) : (
-    <QuestionList questions={questions} />
-  );
+  const getMoreQuestions = () => {
+    setNumOfQuestions((prev) => prev + 5);
+  };
 
   return (
     <>
@@ -40,7 +37,9 @@ export default function Home() {
             </LinkContainer>
           </Col>
         </Row>
-        {loadingOrQuestions}
+        <QuestionList questions={questions} />
+        {loading && <Loading />}
+        <Button onClick={getMoreQuestions}>get more questions</Button>
       </Container>
     </>
   );

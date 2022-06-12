@@ -1,5 +1,4 @@
 import QuestionItem from "./QuestionItem";
-import Question from "./QuestionItem";
 
 function QuestionList({ questions }) {
   return (

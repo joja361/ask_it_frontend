@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./authSlice";
-import { questionsReducer } from "./questionsSlice";
+import { hotQuestionsReducer } from "./hotQuestionsSlice";
 import { myQuestionReducer } from "./myQuestionsSlice";
 import { questionReducer } from "./questionSlice";
+import { questionsReducer } from "./questionsSlice";
+import { responsesReducer } from "./responseSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ const store = configureStore({
     questionsStore: questionsReducer,
     questionStore: questionReducer,
     myQuestionsStore: myQuestionReducer,
+    responsesStore: responsesReducer,
+    // hotQuestionsStore: hotQuestionsReducer,
   },
 });
 
