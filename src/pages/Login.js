@@ -9,6 +9,7 @@ import InputField from "../components/InputField";
 import LoginButton from "../components/LoginButton";
 import NavAuth from "../components/NavAuth";
 import { authData, loginUser } from "../store/authSlice";
+import { resetQuestions } from "../store/questionsSlice";
 
 function Login() {
   const navigate = useNavigate();
@@ -33,7 +34,6 @@ function Login() {
     const { email, password } = values;
     dispatch(loginUser(email, password));
   };
-  console.log("LOGIN");
 
   useEffect(() => {
     if (isAuthenticated) {

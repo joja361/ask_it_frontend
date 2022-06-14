@@ -18,13 +18,13 @@ const rootReducer = (state, action) => {
   if (action.type === "authSlice/logout") {
     state = undefined;
   }
-  if (action.type === "authSlice/login") {
-    state.questionsStore = {
-      loading: false,
-      questions: [],
-      error: "",
-    };
-  }
+  // if (action.type === "authSlice/login") {
+  //   state.questionsStore = {
+  //     loading: false,
+  //     questions: [],
+  //     error: "",
+  //   };
+  // }
   return combinedReducers(state, action);
 };
 

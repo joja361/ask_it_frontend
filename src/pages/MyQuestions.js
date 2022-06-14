@@ -9,6 +9,7 @@ import Loading from "../components/Loading";
 
 import {
   getMyQuestions,
+  getTotalNumOfMyQuesions,
   getTotalNumOfQuesions,
   myQuestionsData,
 } from "../store/myQuestionsSlice";
@@ -28,7 +29,7 @@ export default function MyQuestions() {
   };
 
   useEffect(() => {
-    dispatch(getTotalNumOfQuesions(userId));
+    dispatch(getTotalNumOfMyQuesions(userId));
   }, [dispatch, userId]);
 
   useEffect(() => {

@@ -55,11 +55,11 @@ export const getMyQuestions = (userId, numOfQuestions) => async (dispatch) => {
   }
 };
 
-export const getTotalNumOfQuesions = (userId) => async (dispatch) => {
+export const getTotalNumOfMyQuesions = (userId) => async (dispatch) => {
   try {
     const { data } = await mainUrl(`/user/${userId}/totalQuestions`);
-    const { totalNumOfQuestions } = data;
-    dispatch(fetchTotalNumOfMyQuestions(totalNumOfQuestions));
+    const { totalNumOfMyQuestions } = data;
+    dispatch(fetchTotalNumOfMyQuestions(totalNumOfMyQuestions));
   } catch (error) {
     console.log(error);
   }

@@ -89,6 +89,7 @@ export const loginUser = (loginEmail, password) => async (dispatch) => {
     saveUserData(token, email, userId);
     return dispatch(login({ email, name, userId }));
   } catch (err) {
+    console.log(err);
     dispatch(
       setError({
         error: {
