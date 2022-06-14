@@ -5,6 +5,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import NavBar from "../components/NavBar";
 import QuestionList from "../components/Questions/QuestionList";
 import { authData } from "../store/authSlice";
+import Loading from "../components/Loading";
+
 import {
   getMyQuestions,
   getTotalNumOfQuesions,
@@ -27,21 +29,18 @@ export default function MyQuestions() {
 
   useEffect(() => {
     dispatch(getTotalNumOfQuesions(userId));
-  }, []);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     dispatch(getMyQuestions(userId, numOfQuestions));
-  }, [dispatch, numOfQuestions]);
+  }, [dispatch, numOfQuestions, userId]);
 
-  const loadingOrQuestions = loading ? (
-    <Spinner
-      className="d-block mx-auto spinner-grow-empty-page"
-      animation="grow"
-      size="lg"
-    />
-  ) : (
-    <QuestionList questions={myQuestions} />
-  );
+  const getMoreQuestionsButton = () => {
+    const numOfQuestionsToCatch = numOfQuestions + 5;
+    return numOfQuestionsToCatch > totalQuestions;
+  };
+
+  console.log(getMoreQuestionsButton());
 
   return (
     <>
@@ -57,8 +56,11 @@ export default function MyQuestions() {
             </LinkContainer>
           </Col>
         </Row>
-        {loadingOrQuestions}
-        <Button onClick={getMoreQuestions}>get more questions</Button>
+        {myQuestions.length > 0 && <QuestionList questions={myQuestions} />}
+        {loading && <Loading />}
+        {getMoreQuestionsButton() && (
+          <Button onClick={getMoreQuestions}>get more questions</Button>
+        )}
       </Container>
     </>
   );

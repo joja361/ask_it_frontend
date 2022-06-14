@@ -1,18 +1,19 @@
 import { Form, Formik } from "formik";
-import React from "react";
-import { Button, Col, Row, Spinner } from "react-bootstrap";
+import { useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import image from "../asset/background.jpg";
 import InputField from "../components/InputField";
+import LoginButton from "../components/LoginButton";
 import NavAuth from "../components/NavAuth";
 import { authData, loginUser } from "../store/authSlice";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector(authData);
+  const { error, isAuthenticated } = useSelector(authData);
 
   let { login: errorLogin } = error;
 
@@ -30,13 +31,15 @@ function Login() {
 
   const onSubmit = async (values) => {
     const { email, password } = values;
-    try {
-      await dispatch(loginUser(email, password));
-      return navigate("/");
-    } catch (err) {
-      errorLogin = "Something went wrong";
-    }
+    dispatch(loginUser(email, password));
   };
+  console.log("LOGIN");
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   return (
     <>
@@ -65,19 +68,7 @@ function Login() {
                     type="password"
                     name="password"
                   />
-                  <Button type="submit" className="w-100" disabled={loading}>
-                    {loading && (
-                      <Spinner
-                        className="me-2"
-                        as="span"
-                        animation="grow"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                      />
-                    )}
-                    {loading ? "Loading..." : "Login"}
-                  </Button>
+                  <LoginButton />
                   {errorLogin && (
                     <div className="error-message mt-2 text-center">
                       {errorLogin}

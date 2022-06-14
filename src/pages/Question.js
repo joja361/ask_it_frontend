@@ -34,7 +34,7 @@ function Question() {
   useEffect(() => {
     dispatch(getQuestion(questionId));
     dispatch(getResponses(questionId));
-  }, []);
+  }, [dispatch, questionId]);
 
   const loadingOrQuestion = questionLoading ? (
     <Loading />

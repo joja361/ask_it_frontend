@@ -33,7 +33,7 @@ const authSlice = createSlice({
         user: { ...action.payload },
       };
     },
-    logout(state) {
+    logout(state, action) {
       deleteUserData();
       return { ...state, loading: false, isAuthenticated: false };
     },
@@ -79,24 +79,22 @@ export const signupUser =
   };
 
 export const loginUser = (loginEmail, password) => async (dispatch) => {
+  dispatch(setLoading());
   try {
-    dispatch(setLoading());
     const { data } = await mainUrl.post("/auth/login", {
       email: loginEmail,
       password,
     });
     const { userId, token, email, name } = data;
     saveUserData(token, email, userId);
-    dispatch(login({ email, name, userId }));
-    return Promise.resolve();
+    return dispatch(login({ email, name, userId }));
   } catch (err) {
     dispatch(
       setError({
         error: {
-          login: err.response.data.message,
+          login: err.response?.data.message,
         },
       })
     );
-    return Promise.reject();
   }
 };

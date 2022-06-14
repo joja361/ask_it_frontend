@@ -5,16 +5,17 @@ import { LinkContainer } from "react-router-bootstrap";
 import Loading from "../components/Loading";
 import NavBar from "../components/NavBar";
 import QuestionList from "../components/Questions/QuestionList";
+import { authData } from "../store/authSlice";
 import { getQuestions, questionsData } from "../store/questionsSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
   const { loading, questions, error } = useSelector(questionsData);
+
   const isAuthenticated = useSelector(
     (store) => store.authStore.isAuthenticated
   );
   const [numOfQuestions, setNumOfQuestions] = useState(5);
-
   useEffect(() => {
     dispatch(getQuestions(numOfQuestions));
   }, [dispatch, numOfQuestions]);
@@ -37,9 +38,11 @@ export default function Home() {
             </LinkContainer>
           </Col>
         </Row>
-        <QuestionList questions={questions} />
+        {questions.length > 0 && <QuestionList questions={questions} />}
         {loading && <Loading />}
-        <Button onClick={getMoreQuestions}>get more questions</Button>
+        {!loading && (
+          <Button onClick={getMoreQuestions}>get more questions</Button>
+        )}
       </Container>
     </>
   );
