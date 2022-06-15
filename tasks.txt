@@ -18,4 +18,4 @@ TODO: path moreQuestions for the myQuestions
 
 TODO: route /questions/totalQuestion doesn't need Authentication
 
-TODO: provjeriti kada nismoi authenticated zasto imamo 2 loading-a
+TODO: provjeriti kada nismoi authenticated zasto imamo 2 loading-a. Ovo imamo jer radimo fetch posebno questiona a posebno response

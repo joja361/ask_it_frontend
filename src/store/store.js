@@ -4,13 +4,13 @@ import { myQuestionReducer } from "./myQuestionsSlice";
 import { questionReducer } from "./questionSlice";
 import { questionsReducer } from "./questionsSlice";
 import { responsesReducer } from "./responseSlice";
-import { totaNulOfQuestionsReducer } from "./totalNumOfQuestions";
+import { totaNumOfQuestionsReducer } from "./totalNumOfQuestions";
 
 const combinedReducers = combineReducers({
   authStore: authReducer,
   questionsStore: questionsReducer,
   questionStore: questionReducer,
-  totaNumOfQuestions: totaNulOfQuestionsReducer,
+  totaNumOfQuestions: totaNumOfQuestionsReducer,
   myQuestionsStore: myQuestionReducer,
   responsesStore: responsesReducer,
 });

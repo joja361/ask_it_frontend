@@ -6,20 +6,21 @@ import { useParams } from "react-router-dom";
 import { authData } from "../../store/authSlice";
 import {
   getTotalNumOfQuestions,
-  totaNulOfQuestionsData,
+  totalNumOfQuestionsData,
 } from "../../store/totalNumOfQuestions";
 
 export default function HeaderOfQuestionList({ myQuestions = false }) {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector(authData);
   const { loadingTotalQuestions, totalQuestions, errorTotalQuestions } =
-    useSelector(totaNulOfQuestionsData);
+    useSelector(totalNumOfQuestionsData);
   const { userId } = useParams();
 
   useEffect(() => {
     if (isAuthenticated) {
-      const fetchMyQuestionsOrAll = myQuestions && userId;
-      dispatch(getTotalNumOfQuestions(fetchMyQuestionsOrAll));
+      dispatch(getTotalNumOfQuestions(userId));
+    } else {
+      dispatch(getTotalNumOfQuestions());
     }
   }, []);
 

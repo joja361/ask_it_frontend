@@ -15,10 +15,14 @@ const myQuestionsSlice = createSlice({
       return { ...state, loading: true, error: "" };
     },
     fetchMyQuestionsSuccess(state, action) {
+      const { data, numOfMyQuestions } = action.payload;
+      const myQuestionsData = numOfMyQuestions
+        ? [...state.myQuestions, ...data]
+        : data;
       return {
         ...state,
         loading: false,
-        myQuestions: [...state.myQuestions, ...action.payload],
+        myQuestions: myQuestionsData,
       };
     },
     fetchMyQuestionsFailure(state, action) {
@@ -37,15 +41,18 @@ export const {
 
 export const myQuestionsData = (store) => store.myQuestionsStore;
 
-export const getMyQuestions = (userId, numOfQuestions) => async (dispatch) => {
-  dispatch(fetchMyQuestionsBegin());
-  try {
-    const { data } = await mainUrl(
-      `/user/${userId}?last=${numOfQuestions}&tab=myQuestions`
-    );
-    return dispatch(fetchMyQuestionsSuccess(data));
-  } catch (err) {
-    console.log(err);
-    dispatch(fetchMyQuestionsFailure());
-  }
-};
+export const getMyQuestions =
+  (userId, numOfMyQuestions) => async (dispatch) => {
+    dispatch(fetchMyQuestionsBegin());
+    try {
+      let more;
+      numOfMyQuestions !== 0
+        ? (more = `&moreQuestions=${numOfMyQuestions}`)
+        : (more = ``);
+      const { data } = await mainUrl(`/user/${userId}?tab=myQuestions${more}`);
+      return dispatch(fetchMyQuestionsSuccess({ data, numOfMyQuestions }));
+    } catch (err) {
+      console.log(err);
+      dispatch(fetchMyQuestionsFailure());
+    }
+  };

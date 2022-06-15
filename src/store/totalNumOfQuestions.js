@@ -7,7 +7,7 @@ const initialState = {
   errorTotalQuestions: "",
 };
 
-const totaNulOfQuestions = createSlice({
+const totaNumOfQuestions = createSlice({
   name: "totalNumOfQuestions",
   initialState,
   reducers: {
@@ -31,8 +31,8 @@ const totaNulOfQuestions = createSlice({
   },
 });
 
-export const { reducer: totaNulOfQuestionsReducer, actions } =
-  totaNulOfQuestions;
+export const { reducer: totaNumOfQuestionsReducer, actions } =
+  totaNumOfQuestions;
 
 export const {
   fetchTotalNumOfQuestionsBegin,
@@ -40,7 +40,7 @@ export const {
   fetchTotalNumOfQuestionsFailure,
 } = actions;
 
-export const totaNulOfQuestionsData = (store) => store.totaNumOfQuestions;
+export const totalNumOfQuestionsData = (store) => store.totaNumOfQuestions;
 
 export const getTotalNumOfQuestions = (userId) => async (dispatch) => {
   const fetchMyQuestionOrAll = userId

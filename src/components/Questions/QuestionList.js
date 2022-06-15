@@ -1,10 +1,15 @@
+import { totalNumOfQuestionsData } from "../../store/totalNumOfQuestions";
 import QuestionItem from "./QuestionItem";
+import { useSelector } from "react-redux";
 
-function QuestionList({  questions }) {
-  if (questions.length) {
-    <div>No Questions Asked</div>;
+function QuestionList({ questions }) {
+  const { loadingTotalQuestions, totalQuestions } = useSelector(
+    totalNumOfQuestionsData
+  );
+
+  if (!loadingTotalQuestions && totalQuestions === 0) {
+    return <h4>No Question Asked</h4>;
   }
-
   return (
     <>
       {questions.map((questionData, i) => {

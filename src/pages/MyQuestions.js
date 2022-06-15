@@ -14,13 +14,13 @@ export default function MyQuestions() {
   const { loading, myQuestions, error } = useSelector(myQuestionsData);
   const { user } = useSelector(authData);
   const { userId } = user;
-  const [numOfQuestions, setNumOfQuestions] = useState(0);
+  const [numOfMyQuestions, setNumOfMyQuestions] = useState(0);
 
-  console.log(numOfQuestions);
+  console.log(numOfMyQuestions);
 
   useEffect(() => {
-    dispatch(getMyQuestions(userId, numOfQuestions));
-  }, [dispatch, numOfQuestions, userId]);
+    dispatch(getMyQuestions(userId, numOfMyQuestions));
+  }, [dispatch, numOfMyQuestions, userId]);
 
   return (
     <>
@@ -31,8 +31,8 @@ export default function MyQuestions() {
         {loading && <Loading />}
         <LoadMoreButton
           loading={loading}
-          loadMore={setNumOfQuestions}
-          numOfQuestions={numOfQuestions}
+          loadMore={setNumOfMyQuestions}
+          numOfQuestions={numOfMyQuestions}
         />
       </Container>
     </>

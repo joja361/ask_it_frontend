@@ -46,7 +46,7 @@ function Login() {
       <Row className="form-page-wrapper">
         <Col md={6} lg={8} className="d-none d-md-block">
           <a /*href="https://www.freepik.com/vectors/man"*/>
-            <Col className="d-glex justify content-center">
+            <Col className="d-flex justify-content-center">
               <img src={image} className="login-img" alt="question" />
             </Col>
           </a>

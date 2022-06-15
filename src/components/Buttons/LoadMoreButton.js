@@ -1,9 +1,9 @@
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { totaNulOfQuestionsData } from "../../store/totalNumOfQuestions";
+import { totalNumOfQuestionsData } from "../../store/totalNumOfQuestions";
 
 export default function LoadMoreButton({ loading, loadMore, numOfQuestions }) {
-  const { totalQuestions } = useSelector(totaNulOfQuestionsData);
+  const { totalQuestions } = useSelector(totalNumOfQuestionsData);
 
   const disableButton = (prev, step, total) => {
     if (prev + step >= total) {

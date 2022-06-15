@@ -9,7 +9,7 @@ const getToken = () => {
 };
 
 export const mainUrl = axios.create({
-  baseURL: newURL,
+  baseURL: URL,
 });
 
 export const setupInterceptors = (store) => {
