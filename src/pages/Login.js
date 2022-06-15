@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import image from "../asset/background.jpg";
+import LoginButton from "../components//Buttons/LoginButton";
 import InputField from "../components/InputField";
-import LoginButton from "../components/LoginButton";
 import NavAuth from "../components/NavAuth";
 import { authData, loginUser } from "../store/authSlice";
-import { resetQuestions } from "../store/questionsSlice";
 
 function Login() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const URL = "http://localhost:5000";
-const newURL = "https://9673-77-78-235-66.eu.ngrok.io";
+const newURL = "https://0e44-77-78-235-66.eu.ngrok.io";
 
 const getToken = () => {
   const token = localStorage.getItem("token");
@@ -9,7 +9,7 @@ const getToken = () => {
 };
 
 export const mainUrl = axios.create({
-  baseURL: URL,
+  baseURL: newURL,
 });
 
 export const setupInterceptors = (store) => {

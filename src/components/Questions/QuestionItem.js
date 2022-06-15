@@ -1,8 +1,8 @@
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import Avatar from "../Avatar";
 import QuestionLikeAndDislike from "./QuestionLikeAndDislike";
 import QuestionTime from "./QuestionTime";
+import QuestionTitle from "./QuestionTitle";
 
 export default function QuestionItem({
   id,
@@ -13,14 +13,6 @@ export default function QuestionItem({
   description,
   list = false,
 }) {
-  const linkedQuestionOrQuestion = list ? (
-    <Link to={`/questions/${id}`} className="question-link">
-      <h5 className="m-0 question">{question}</h5>
-    </Link>
-  ) : (
-    <h5 className="m-0 question">{question}</h5>
-  );
-
   return (
     <>
       <Row>
@@ -31,10 +23,8 @@ export default function QuestionItem({
           <Avatar size={40} user={name || email} />
         </Col>
         <Col md={10}>
-          <div className="m-0 user-created-time">
-            asked <QuestionTime created={created_at} /> ago
-          </div>
-          {linkedQuestionOrQuestion}
+          <QuestionTime created={created_at} />
+          <QuestionTitle id={id} question={question} list={list} />
         </Col>
       </Row>
       <Row className="py-2">

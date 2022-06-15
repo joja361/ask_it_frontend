@@ -4,11 +4,13 @@ import { myQuestionReducer } from "./myQuestionsSlice";
 import { questionReducer } from "./questionSlice";
 import { questionsReducer } from "./questionsSlice";
 import { responsesReducer } from "./responseSlice";
+import { totaNulOfQuestionsReducer } from "./totalNumOfQuestions";
 
 const combinedReducers = combineReducers({
   authStore: authReducer,
   questionsStore: questionsReducer,
   questionStore: questionReducer,
+  totaNumOfQuestions: totaNulOfQuestionsReducer,
   myQuestionsStore: myQuestionReducer,
   responsesStore: responsesReducer,
 });
@@ -18,13 +20,6 @@ const rootReducer = (state, action) => {
   if (action.type === "authSlice/logout") {
     state = undefined;
   }
-  // if (action.type === "authSlice/login") {
-  //   state.questionsStore = {
-  //     loading: false,
-  //     questions: [],
-  //     error: "",
-  //   };
-  // }
   return combinedReducers(state, action);
 };
 

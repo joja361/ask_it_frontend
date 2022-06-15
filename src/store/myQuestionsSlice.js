@@ -5,7 +5,6 @@ const initialState = {
   loading: false,
   myQuestions: [],
   error: "",
-  totalQuestions: 0,
 };
 
 const myQuestionsSlice = createSlice({
@@ -25,9 +24,6 @@ const myQuestionsSlice = createSlice({
     fetchMyQuestionsFailure(state, action) {
       return { ...state, loading: false, error: action.payload };
     },
-    fetchTotalNumOfMyQuestions(state, action) {
-      return { ...state, totalQuestions: action.payload };
-    },
   },
 });
 
@@ -37,7 +33,6 @@ export const {
   fetchMyQuestionsBegin,
   fetchMyQuestionsSuccess,
   fetchMyQuestionsFailure,
-  fetchTotalNumOfMyQuestions,
 } = actions;
 
 export const myQuestionsData = (store) => store.myQuestionsStore;
@@ -52,15 +47,5 @@ export const getMyQuestions = (userId, numOfQuestions) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch(fetchMyQuestionsFailure());
-  }
-};
-
-export const getTotalNumOfMyQuesions = (userId) => async (dispatch) => {
-  try {
-    const { data } = await mainUrl(`/user/${userId}/totalQuestions`);
-    const { totalNumOfMyQuestions } = data;
-    dispatch(fetchTotalNumOfMyQuestions(totalNumOfMyQuestions));
-  } catch (error) {
-    console.log(error);
   }
 };

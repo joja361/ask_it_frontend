@@ -1,6 +1,10 @@
 import QuestionItem from "./QuestionItem";
 
-function QuestionList({ questions }) {
+function QuestionList({  questions }) {
+  if (questions.length) {
+    <div>No Questions Asked</div>;
+  }
+
   return (
     <>
       {questions.map((questionData, i) => {

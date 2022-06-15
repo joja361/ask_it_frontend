@@ -1,6 +1,6 @@
 import { Button, Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { authData } from "../store/authSlice";
+import { authData } from "../../store/authSlice";
 
 export default function LoginButton() {
   const { loading } = useSelector(authData);

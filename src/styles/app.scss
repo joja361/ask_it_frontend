@@ -210,6 +210,10 @@ $dark-gray: #8f8f8f;
 
 //Question
 
+.questions-list-header {
+  height: 65px;
+}
+
 .question-wrapper {
   max-width: 850px;
 }
@@ -237,8 +241,8 @@ $dark-gray: #8f8f8f;
 
 .like,
 .dislike {
-  height: 26px;
-  width: 26px;
+  height: 30px;
+  width: 30px;
   color: $dark-gray;
   cursor: pointer;
   font-weight: 100;
@@ -246,8 +250,8 @@ $dark-gray: #8f8f8f;
 }
 
 .user-like-dislike-comment {
-  height: 24px;
-  width: 24px;
+  height: 28px;
+  width: 28px;
   cursor: pointer;
   color: $dark-gray;
 

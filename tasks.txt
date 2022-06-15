@@ -13,3 +13,9 @@ TODO: /questions?last=20 - treba napraviti funkcionalnost sa load more funkciona
 TODO: HOMEPAGE -- errorhandeling need to be done
 
 TODO: ne treba se prikazivati button "get more question" ukoliko na serveru nemamo vise pitanja
+
+TODO: path moreQuestions for the myQuestions
+
+TODO: route /questions/totalQuestion doesn't need Authentication
+
+TODO: provjeriti kada nismoi authenticated zasto imamo 2 loading-a

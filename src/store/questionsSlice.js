@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { mainUrl } from "../utils/axiosInstances";
-import { questionData } from "./questionSlice";
 
 const initialState = {
   loading: false,
   questions: [],
   error: "",
-  totalQuestions: 0,
 };
 
 const questionsSlice = createSlice({
@@ -30,9 +28,6 @@ const questionsSlice = createSlice({
     fetchQuestionsFailure(state, action) {
       return { ...state, loading: false, error: action.payload };
     },
-    fetchTotalNumOfQuestions(state, action) {
-      return { ...state, totalQuestions: action.payload };
-    },
   },
 });
 
@@ -42,7 +37,6 @@ export const {
   fetchQuestionsBegin,
   fetchQuestionsSuccess,
   fetchQuestionsFailure,
-  fetchTotalNumOfQuestions,
 } = actions;
 
 export const questionsData = (store) => store.questionsStore;
@@ -59,15 +53,5 @@ export const getQuestions = (numOfQuestions) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch(fetchQuestionsFailure());
-  }
-};
-
-export const getTotalNumOfQuesions = () => async (dispatch) => {
-  try {
-    const { data } = await mainUrl(`/questions/totalQuestions`);
-    const { totalNumOfQuestions } = data;
-    dispatch(fetchTotalNumOfQuestions(totalNumOfQuestions));
-  } catch (error) {
-    console.log(error);
   }
 };
