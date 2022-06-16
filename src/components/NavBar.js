@@ -1,7 +1,7 @@
 import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import logo from "../asset/Logo.jpg";
+import logo from "../asset/logo.svg";
 import { authData, logout } from "../store/authSlice";
 import Avatar from "./Avatar";
 
@@ -21,11 +21,20 @@ function NavBar() {
     <Navbar className="p-0" expand="sm">
       <Container>
         <Navbar.Brand>
-          <Link to="/" onClick={() => window.location.href("/")}>
+          <Link
+            to="/"
+            className="pe-3"
+            onClick={() => window.location.href("/")}
+          >
             <Image src={logo} className="logo" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar" />
+        {!isAuthenticated && (
+          <Link to={"/login"} className="btn btn-outline-primary">
+            Login
+          </Link>
+        )}
         {isAuthenticated && (
           <Navbar.Collapse id="navbar">
             <Nav className="me-auto">

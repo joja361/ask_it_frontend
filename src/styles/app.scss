@@ -8,9 +8,15 @@ $dark-blue: #1c3144;
 $gray: #d2d4d5;
 $dark-gray: #8f8f8f;
 
+body {
+  background-color: #f3f3f3c5;
+}
+
 .form-page-wrapper {
   align-items: center;
-  margin-top: 15vh;
+  margin-top: 5px;
+  height: 80vh;
+  max-height: calc(100vh - 80px);
 }
 
 @media screen and (min-width: 992px) {
@@ -62,7 +68,7 @@ $dark-gray: #8f8f8f;
   max-width: 300px;
 }
 
-.btn {
+.btn-primary {
   margin-top: 0.7rem;
   background-color: $dark-blue;
 
@@ -82,6 +88,37 @@ $dark-gray: #8f8f8f;
   &:disabled {
     background-color: $dark-blue;
   }
+}
+
+.btn-outline-primary {
+  margin-top: 0.7rem;
+  color: $dark-blue;
+  border-color: $dark-blue;
+
+  &:focus {
+    box-shadow: none;
+    background-color: $dark-blue;
+    border-color: $dark-blue;
+    color: white;
+  }
+  &:active:focus {
+    box-shadow: none;
+  }
+
+  &:hover {
+    background-color: rgba($color: $dark-blue, $alpha: 0.45);
+    color: white;
+    border-color: rgba($color: $dark-blue, $alpha: 0.25);
+  }
+  &:active,
+  &:disabled {
+    background-color: $dark-blue;
+    color: white;
+  }
+}
+
+.load-more {
+  letter-spacing: 2px;
 }
 
 .error-message {
@@ -131,6 +168,23 @@ $dark-gray: #8f8f8f;
 }
 
 //Navbar
+
+// .nav-shadow {
+//   position: relative;
+
+//   &::after {
+//     position: absolute;
+//     bottom: 1px;
+//     content: "";
+//     height: 0.1px;
+//     width: 50%;
+//     left: 25%;
+//     // right: 10%;
+//     // background-color: white;
+//     // z-index: -1;
+//     box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.2);
+//   }
+// }
 
 .navbar-brand {
   padding: 0;

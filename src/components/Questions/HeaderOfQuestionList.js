@@ -22,7 +22,7 @@ export default function HeaderOfQuestionList({ myQuestions = false }) {
     } else {
       dispatch(getTotalNumOfQuestions());
     }
-  }, []);
+  }, [isAuthenticated, dispatch, userId]);
 
   if (loadingTotalQuestions) {
     return <div className="questions-list-header"></div>;

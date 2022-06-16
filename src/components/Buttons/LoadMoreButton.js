@@ -24,5 +24,11 @@ export default function LoadMoreButton({ loading, loadMore, numOfQuestions }) {
     return;
   }
 
-  return <Button onClick={nextQuestions}>get more questions</Button>;
+  return (
+    <div className="d-flex justify-content-center">
+      <Button variant="outline-primary load-more" onClick={nextQuestions}>
+        LOAD MORE
+      </Button>
+    </div>
+  );
 }

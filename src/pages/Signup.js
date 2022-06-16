@@ -4,7 +4,7 @@ import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import image from "../asset/background.jpg";
+import image from "../asset/background.svg";
 import InputField from "../components/InputField";
 import NavAuth from "../components/NavAuth";
 import { authData, signupUser } from "../store/authSlice";
