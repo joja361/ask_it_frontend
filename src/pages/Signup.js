@@ -4,7 +4,7 @@ import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import image from "../asset/background.svg";
+import ThinkingAbout from "../components/ImagesSvg/ThinkingAbout";
 import InputField from "../components/InputField";
 import NavAuth from "../components/NavAuth";
 import { authData, signupUser } from "../store/authSlice";
@@ -48,11 +48,7 @@ function Signup() {
       <NavAuth to="/login" text="Already have account?" linkText="Login" />
       <Row className="form-page-wrapper">
         <Col md={6} lg={8} className="d-none d-md-block">
-          <a /*href="https://www.freepik.com/vectors/man"*/>
-            <Col className="d-flex justify-content-center">
-              <img src={image} className="login-img" alt="question" />
-            </Col>
-          </a>
+          <ThinkingAbout />
         </Col>
         <Col md={6} lg={4}>
           <Col className="d-flex justify-content-center justify-content-xl-start form-wrapper">

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const URL = "http://localhost:5000";
-const newURL = "https://ca12-77-78-235-66.eu.ngrok.io";
+const newURL = "https://1af6-77-78-235-66.eu.ngrok.io";
 
 const getToken = () => {
   const token = localStorage.getItem("token");

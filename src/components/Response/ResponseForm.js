@@ -28,7 +28,7 @@ export default function ResponseForm({ questionId }) {
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="response-form">
           <TextArea label="Response" name="response" rows={3} />
           <Button type="submit">Response</Button>
         </Form>

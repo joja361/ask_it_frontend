@@ -25,7 +25,7 @@ export default function MyQuestions() {
   return (
     <>
       <NavBar />
-      <Container className="py-3 mx-auto question-wrapper">
+      <Container className="mx-auto question-wrapper">
         <HeaderOfQuestionList myQuestions={true} />
         <QuestionList questions={myQuestions} />
         {loading && <Loading />}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import LoadMoreButton from "../components/Buttons/LoadMoreButton";
+import HomeSvg from "../components/ImagesSvg/HomeSvg";
 import Loading from "../components/Loading";
 import NavBar from "../components/NavBar";
 import HeaderOfQuestionList from "../components/Questions/HeaderOfQuestionList";
@@ -20,7 +21,8 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <Container className="py-3 mx-auto question-wrapper">
+      <Container className="mx-auto question-wrapper">
+        <HomeSvg />
         <HeaderOfQuestionList />
         <QuestionList questions={questions} />
         {loading && <Loading />}

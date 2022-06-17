@@ -4,8 +4,9 @@ import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import image from "../asset/background.svg";
+
 import LoginButton from "../components//Buttons/LoginButton";
+import ThinkingAbout from "../components/ImagesSvg/ThinkingAbout";
 import InputField from "../components/InputField";
 import NavAuth from "../components/NavAuth";
 import { authData, loginUser } from "../store/authSlice";
@@ -45,11 +46,7 @@ function Login() {
       <NavAuth to="/signup" text="Don't have account?" linkText="Sign Up" />
       <Row className="form-page-wrapper">
         <Col md={6} lg={8} className="d-none d-md-block">
-          <a /*href="https://www.freepik.com/vectors/man"*/>
-            <Col className="d-flex justify-content-center">
-              <img src={image} className="login-img" alt="question" />
-            </Col>
-          </a>
+          <ThinkingAbout />
         </Col>
         <Col md={6} lg={4}>
           <Col className="d-flex justify-content-center justify-content-xl-start form-wrapper">

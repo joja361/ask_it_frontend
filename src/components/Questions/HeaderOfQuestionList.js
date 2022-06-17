@@ -33,7 +33,7 @@ export default function HeaderOfQuestionList({ myQuestions = false }) {
   return (
     <Row className="questions-list-header">
       <Col>
-        <h2>{`${headerTitle} ${totalQuestions ? totalQuestions : ""}`}</h2>
+        <h2 className="question-header">{`${headerTitle} ${totalQuestions ? totalQuestions : ""}`}</h2>
       </Col>
       <Col xs="auto">
         <LinkContainer to={isAuthenticated ? "/questions/ask" : "/login"}>

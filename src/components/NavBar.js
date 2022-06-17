@@ -1,9 +1,9 @@
 import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import logo from "../asset/logo.svg";
 import { authData, logout } from "../store/authSlice";
 import Avatar from "./Avatar";
+import Logo from "./ImagesSvg/Logo";
 
 function NavBar() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function NavBar() {
   };
 
   return (
-    <Navbar className="p-0" expand="sm">
+    <Navbar className="p-0 fixed-top" expand="sm">
       <Container>
         <Navbar.Brand>
           <Link
@@ -26,7 +26,7 @@ function NavBar() {
             className="pe-3"
             onClick={() => window.location.href("/")}
           >
-            <Image src={logo} className="logo" />
+            <Logo />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar" />

@@ -12,13 +12,17 @@ TODO: /questions?last=20 - treba napraviti funkcionalnost sa load more funkciona
 
 TODO: HOMEPAGE -- errorhandeling need to be done
 
-TODO: ne treba se prikazivati button "get more question" ukoliko na serveru nemamo vise pitanja
+ne treba se prikazivati button "get more question" ukoliko na serveru nemamo vise pitanja // ZAVRSENO
 
-TODO: path moreQuestions for the myQuestions
+path moreQuestions for the myQuestions // ZAVRSENO
 
-TODO: route /questions/totalQuestion doesn't need Authentication
+route /questions/totalQuestion doesn't need Authentication / ZAVRSENO
 
-TODO: provjeriti kada nismoi authenticated zasto imamo 2 loading-a. Ovo imamo jer radimo fetch posebno questiona a posebno response
+FIXME: provjeriti kada nismo authenticated zasto imamo 2 loading-a. Ovo imamo jer radimo fetch posebno questiona a posebno response // provjeriti kako pravilno postupiti
+
+TODO: Provjeriti kada se ne kacimo kroz ngrok da li ima request method options i sta to znaci
+
+LINKOVI KORISNI: 
 
 https://undraw.co/search
 

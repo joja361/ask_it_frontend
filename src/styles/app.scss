@@ -68,9 +68,15 @@ body {
   max-width: 300px;
 }
 
+.response-form {
+  margin-top: 20px;
+}
+
 .btn-primary {
   margin-top: 0.7rem;
+  font-weight: 300;
   background-color: $dark-blue;
+  border-color: $dark-blue;
 
   &:focus {
     box-shadow: none;
@@ -115,6 +121,9 @@ body {
     background-color: $dark-blue;
     color: white;
   }
+}
+.btn {
+  padding: 4px 12px;
 }
 
 .load-more {
@@ -163,8 +172,8 @@ body {
 }
 
 .logo {
-  height: 80px;
-  aspect-ratio: 1 / 1;
+  height: 66px;
+  // aspect-ratio: 1 / 1;
 }
 
 //Navbar
@@ -185,6 +194,10 @@ body {
 //     box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.2);
 //   }
 // }
+.navbar {
+  box-shadow: 0 2px 2.5px rgba(28, 49, 68, 0.2);
+  background-color: white;
+}
 
 .navbar-brand {
   padding: 0;
@@ -264,11 +277,18 @@ body {
 
 //Question
 
+.question-header {
+  font-size: 1.8rem;
+  margin-top: 7px;
+  font-weight: 400;
+}
+
 .questions-list-header {
   height: 65px;
 }
 
 .question-wrapper {
+  margin-top: 85px;
   max-width: 850px;
 }
 
@@ -316,4 +336,14 @@ body {
   &.dislike-active {
     color: red;
   }
+}
+.img-container {
+  position: absolute;
+  left: 0px;
+}
+
+.home-img {
+  top: 160px;
+  width: 18%;
+  left: 2%;
 }
