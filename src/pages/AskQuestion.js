@@ -36,7 +36,7 @@ export default function AskQuestion() {
   return (
     <>
       <NavBar />
-      <Container className="question-wrapper">
+      <Container className="wrapper">
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}

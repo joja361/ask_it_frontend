@@ -4,7 +4,8 @@ import { mainUrl } from "../utils/axiosInstances";
 const initialState = {
   loading: false,
   myQuestions: [],
-  error: "",
+  likes: [],
+  error: {},
 };
 
 const myQuestionsSlice = createSlice({
@@ -12,17 +13,21 @@ const myQuestionsSlice = createSlice({
   initialState,
   reducers: {
     fetchMyQuestionsBegin(state) {
-      return { ...state, loading: true, error: "" };
+      return { ...state, loading: true, error: {} };
     },
     fetchMyQuestionsSuccess(state, action) {
-      const { data, numOfMyQuestions } = action.payload;
+      const { myQuestions, likes, numOfMyQuestions } = action.payload;
       const myQuestionsData = numOfMyQuestions
-        ? [...state.myQuestions, ...data]
-        : data;
+        ? [...state.myQuestions, ...myQuestions]
+        : myQuestions;
+
+      const likesData = numOfMyQuestions ? [...state.likes, ...likes] : likes;
+
       return {
         ...state,
         loading: false,
         myQuestions: myQuestionsData,
+        likes: likesData,
       };
     },
     fetchMyQuestionsFailure(state, action) {
@@ -41,18 +46,27 @@ export const {
 
 export const myQuestionsData = (store) => store.myQuestionsStore;
 
-export const getMyQuestions =
+export const getMyQuestionsAndLikes =
   (userId, numOfMyQuestions) => async (dispatch) => {
     dispatch(fetchMyQuestionsBegin());
     try {
       let more;
       numOfMyQuestions !== 0
-        ? (more = `&moreQuestions=${numOfMyQuestions}`)
+        ? (more = `?moreQuestions=${numOfMyQuestions}`)
         : (more = ``);
-      const { data } = await mainUrl(`/user/${userId}?tab=myQuestions${more}`);
-      return dispatch(fetchMyQuestionsSuccess({ data, numOfMyQuestions }));
-    } catch (err) {
-      console.log(err);
-      dispatch(fetchMyQuestionsFailure());
+      const listOfMyQuestions = mainUrl(`/user/${userId}/questions${more}`);
+      const listOfLikes = mainUrl(`/user/${userId}/getLikesAndDislikes`);
+      const myQuestionsAndLikes = await Promise.all([
+        listOfMyQuestions,
+        listOfLikes,
+      ]);
+      const [{ data: myQuestions }, { data: likes }] = myQuestionsAndLikes;
+      dispatch(
+        fetchMyQuestionsSuccess({ myQuestions, likes, numOfMyQuestions })
+      );
+    } catch (error) {
+      const { data, status } = error.response;
+      const { message } = data;
+      dispatch(fetchMyQuestionsFailure({ status, message }));
     }
   };

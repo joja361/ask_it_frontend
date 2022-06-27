@@ -4,7 +4,7 @@ import { mainUrl } from "../utils/axiosInstances";
 const initialState = {
   loadingTotalQuestions: false,
   totalQuestions: 0,
-  errorTotalQuestions: "",
+  errorTotalQuestions: {},
 };
 
 const totaNumOfQuestions = createSlice({
@@ -12,7 +12,7 @@ const totaNumOfQuestions = createSlice({
   initialState,
   reducers: {
     fetchTotalNumOfQuestionsBegin(state, action) {
-      return { ...state, loadingTotalQuestions: true, errorTotalQuestions: "" };
+      return { ...state, loadingTotalQuestions: true, errorTotalQuestions: {} };
     },
     fetchTotalNumOfQuestionsSuccess(state, action) {
       return {
@@ -58,7 +58,8 @@ export const getTotalNumOfQuestions = (userId) => async (dispatch) => {
       )
     );
   } catch (error) {
-    console.log(error);
-    dispatch(fetchTotalNumOfQuestionsFailure());
+    const { data, status } = error.response;
+    const { message } = data;
+    dispatch(fetchTotalNumOfQuestionsFailure({ status, message }));
   }
 };

@@ -31,15 +31,20 @@ export default function HeaderOfQuestionList({ myQuestions = false }) {
   const headerTitle = myQuestions ? "My Questions" : "All Questions";
 
   return (
-    <Row className="questions-list-header">
-      <Col>
-        <h2 className="question-header">{`${headerTitle} ${totalQuestions ? totalQuestions : ""}`}</h2>
-      </Col>
-      <Col xs="auto">
-        <LinkContainer to={isAuthenticated ? "/questions/ask" : "/login"}>
-          <Button>Ask Question</Button>
-        </LinkContainer>
-      </Col>
-    </Row>
+    <>
+      <Row className="questions-list-header">
+        <Col>
+          <h2 className="question-header">{`${headerTitle} ${
+            totalQuestions ? totalQuestions : ""
+          }`}</h2>
+        </Col>
+        <Col xs="auto">
+          <LinkContainer to={isAuthenticated ? "/questions/ask" : "/login"}>
+            <Button>Ask Question</Button>
+          </LinkContainer>
+        </Col>
+      </Row>
+      {loadingTotalQuestions && <div style={{ minHeight: 65 }}></div>}
+    </>
   );
 }

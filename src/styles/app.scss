@@ -12,6 +12,11 @@ body {
   background-color: #f3f3f3c5;
 }
 
+.wrapper {
+  margin-top: 85px;
+  max-width: 850px;
+}
+
 .form-page-wrapper {
   align-items: center;
   margin-top: 5px;
@@ -68,10 +73,6 @@ body {
   max-width: 300px;
 }
 
-.response-form {
-  margin-top: 20px;
-}
-
 .btn-primary {
   margin-top: 0.7rem;
   font-weight: 300;
@@ -97,7 +98,7 @@ body {
 }
 
 .btn-outline-primary {
-  margin-top: 0.7rem;
+  height: fit-content;
   color: $dark-blue;
   border-color: $dark-blue;
 
@@ -127,6 +128,7 @@ body {
 }
 
 .load-more {
+  margin-top: 2em;
   letter-spacing: 2px;
 }
 
@@ -173,27 +175,10 @@ body {
 
 .logo {
   height: 66px;
-  // aspect-ratio: 1 / 1;
 }
 
 //Navbar
 
-// .nav-shadow {
-//   position: relative;
-
-//   &::after {
-//     position: absolute;
-//     bottom: 1px;
-//     content: "";
-//     height: 0.1px;
-//     width: 50%;
-//     left: 25%;
-//     // right: 10%;
-//     // background-color: white;
-//     // z-index: -1;
-//     box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.2);
-//   }
-// }
 .navbar {
   box-shadow: 0 2px 2.5px rgba(28, 49, 68, 0.2);
   background-color: white;
@@ -270,8 +255,7 @@ body {
   }
 }
 
-.spinner-grow-empty-page {
-  margin-top: 20vh;
+.spinner {
   background-color: $dark-blue;
 }
 
@@ -285,11 +269,6 @@ body {
 
 .questions-list-header {
   height: 65px;
-}
-
-.question-wrapper {
-  margin-top: 85px;
-  max-width: 850px;
 }
 
 .question-link {
@@ -313,6 +292,10 @@ body {
   color: $dark-gray;
 }
 
+.user-name {
+  text-decoration: none;
+}
+
 .like,
 .dislike {
   height: 30px;
@@ -321,13 +304,6 @@ body {
   cursor: pointer;
   font-weight: 100;
   stroke-width: 0.1px;
-}
-
-.user-like-dislike-comment {
-  height: 28px;
-  width: 28px;
-  cursor: pointer;
-  color: $dark-gray;
 
   &.like-active {
     color: green;
@@ -337,6 +313,7 @@ body {
     color: red;
   }
 }
+
 .img-container {
   position: absolute;
   left: 0px;
@@ -346,4 +323,122 @@ body {
   top: 160px;
   width: 18%;
   left: 2%;
+}
+
+.response {
+  font-size: 0.9rem;
+}
+
+.response-header {
+  font-size: 1.5rem;
+  margin-top: 7px;
+  font-weight: 400;
+}
+
+.top-user {
+  &-wrapper {
+    min-height: 350px;
+    background: linear-gradient(
+      90deg,
+      #f3f3f3c5 0%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 1) 85%,
+      #f3f3f3c5 100%
+    );
+  }
+
+  &-header {
+    font-size: 1.9rem;
+    font-weight: 300;
+  }
+
+  &-text {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $dark-blue;
+    margin: 15px 0;
+
+    &-number {
+      padding: 10px 0;
+      font-weight: 500;
+      font-size: 1.3rem;
+    }
+
+    & p {
+      margin: 0;
+    }
+  }
+}
+
+.profile {
+  max-width: 200px;
+  color: $dark-blue;
+
+  &-name {
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  &-user-since {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $dark-blue;
+  }
+
+  &-stats {
+    &-wrapper {
+      color: $dark-blue;
+      margin-top: 20px;
+      background-color: white;
+      border: 1px solid $dark-gray;
+      border-radius: 5px;
+      padding: 5px 0;
+      color: $dark-blue;
+    }
+
+    &-header,
+    &-detail {
+      margin: 0;
+      text-align: center;
+    }
+
+    &-detail {
+      padding-top: 0.3rem;
+    }
+  }
+
+  &-hot-questions {
+    &-header {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin: 2rem 0 1rem 0;
+    }
+    &-text {
+      text-decoration: none;
+      font-size: 20px;
+      padding: 5px 0;
+    }
+  }
+}
+
+.page-not-found {
+  font-family: $secondary-font;
+  height: 80vh;
+
+  & h1,
+  a {
+    font-size: 2rem;
+  }
+
+  & h1 {
+    color: $dark-blue;
+  }
+
+  & a {
+    text-decoration: none;
+  }
 }

@@ -65,7 +65,7 @@ export const signupUser =
         name,
       });
       dispatch(signup());
-      return Promise.resolve();
+      return Promise.resolve(); //TODO: check this
     } catch (err) {
       dispatch(
         setError({

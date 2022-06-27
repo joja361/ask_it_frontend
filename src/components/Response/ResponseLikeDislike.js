@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoCaretDownSharp, IoCaretUpSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { authData } from "../../store/authSlice";
 import { mainUrl } from "../../utils/axiosInstances";
 
-export default function QuestionLikeAndDislike({
-  questionId,
+export default function ResponseLikeAndDislike({
+  id,
   totalLikes,
   like,
   dislike,
@@ -14,26 +15,31 @@ export default function QuestionLikeAndDislike({
   const [count, setCount] = useState(totalLikes);
   const [liked, setLiked] = useState(like);
   const [disliked, setDisliked] = useState(dislike);
+  const { id: questionId } = useParams();
 
   const handleLike = async () => {
     if (isAuthenticated) {
       if (liked) {
         const { status } = await mainUrl.delete(
-          `/questions/${questionId}/like`
+          `/questions/${questionId}/response/${id}/like`
         );
         if (status === 200) {
           setLiked(null);
           setCount((prev) => prev - 1);
         }
       } else if (disliked) {
-        const { status } = await mainUrl.post(`/questions/${questionId}/like`);
+        const { status } = await mainUrl.post(
+          `/questions/${questionId}/response/${id}/like`
+        );
         if (status === 200) {
           setLiked(true);
           setDisliked(null);
           setCount((prev) => prev + 2);
         }
       } else {
-        const { status } = await mainUrl.post(`/questions/${questionId}/like`);
+        const { status } = await mainUrl.post(
+          `/questions/${questionId}/response/${id}/like`
+        );
         if (status === 200) {
           setLiked(true);
           setCount((prev) => prev + 1);
@@ -46,7 +52,7 @@ export default function QuestionLikeAndDislike({
     if (isAuthenticated) {
       if (disliked) {
         const { status } = await mainUrl.delete(
-          `/questions/${questionId}/dislike`
+          `/questions/${questionId}/response/${id}/dislike`
         );
         if (status === 200) {
           setDisliked(null);
@@ -54,7 +60,7 @@ export default function QuestionLikeAndDislike({
         }
       } else if (liked) {
         const { status } = await mainUrl.post(
-          `/questions/${questionId}/dislike`
+          `/questions/${questionId}/response/${id}/dislike`
         );
         if (status === 200) {
           setDisliked(true);
@@ -63,7 +69,7 @@ export default function QuestionLikeAndDislike({
         }
       } else {
         const { status } = await mainUrl.post(
-          `/questions/${questionId}/dislike`
+          `/questions/${questionId}/response/${id}/dislike`
         );
         if (status === 200) {
           setDisliked(true);

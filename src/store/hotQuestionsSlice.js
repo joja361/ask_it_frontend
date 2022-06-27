@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { mainUrl } from "../utils/axiosInstances";
 
 const initialState = {
   loading: false,
   hotQuestions: [],
-  error: "",
+  likes: [],
+  error: {},
 };
 
 const hotQuestionsSlice = createSlice({
@@ -11,10 +13,16 @@ const hotQuestionsSlice = createSlice({
   initialState,
   reducers: {
     fetchHotQuestionsBegin(state) {
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: {} };
     },
     fetchHotQuestionsSuccess(state, action) {
-      return { ...state, loading: false, hotQuestions: action.payload };
+      const { hotQuestions, likes } = action.payload;
+      return {
+        ...state,
+        loading: false,
+        hotQuestions: hotQuestions,
+        likes: likes,
+      };
     },
     fetchHotQuestionsFailure(state, action) {
       return { ...state, loading: false, error: action.payload };
@@ -22,7 +30,7 @@ const hotQuestionsSlice = createSlice({
   },
 });
 
-export const { actions, reducer: hotQuestionsReducer } = hotQuestionsSlice;
+export const { reducer: hotQuestionsReducer, actions } = hotQuestionsSlice;
 
 export const {
   fetchHotQuestionsBegin,
@@ -30,6 +38,23 @@ export const {
   fetchHotQuestionsFailure,
 } = actions;
 
-export const hotQuestionsData = (store) => store.hotQuestionsReducer;
+export const hotQuestionsData = (store) => store.hotQuestionStore;
 
-//First we need to enable like option
+export const getHotQuestionsAndLikes = () => async (dispatch) => {
+  dispatch(fetchHotQuestionsBegin());
+  try {
+    const listOfhotQuestions = mainUrl(`/questions/hotQuestions`);
+    const listOfLikes = mainUrl(`/questions/hotQuestions/likes`);
+    const hotQuestionsAndLikes = await Promise.all([
+      listOfhotQuestions,
+      listOfLikes,
+    ]);
+    const [{ data: hotQuestions }, { data: likes }] = hotQuestionsAndLikes;
+
+    dispatch(fetchHotQuestionsSuccess({ hotQuestions, likes }));
+  } catch (error) {
+    const { data, status } = error.response;
+    const { message } = data;
+    dispatch(fetchHotQuestionsFailure({ status, message }));
+  }
+};

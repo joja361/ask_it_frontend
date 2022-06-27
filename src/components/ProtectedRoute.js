@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
-function ProtectedRoute({ children }) {
+export default function ProtectedRoute({ children }) {
   const isAuthenticated = useSelector(
     (store) => store.authStore.isAuthenticated
   );
@@ -12,5 +12,3 @@ function ProtectedRoute({ children }) {
 
   return children ? children : <Outlet />;
 }
-
-export default ProtectedRoute;

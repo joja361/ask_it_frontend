@@ -4,9 +4,9 @@ import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-
 import LoginButton from "../components//Buttons/LoginButton";
 import ThinkingAbout from "../components/ImagesSvg/ThinkingAbout";
+// import ThinkingAbout from "../components/ImagesSvg/ThinkingAbout";
 import InputField from "../components/InputField";
 import NavAuth from "../components/NavAuth";
 import { authData, loginUser } from "../store/authSlice";
@@ -45,7 +45,7 @@ function Login() {
     <>
       <NavAuth to="/signup" text="Don't have account?" linkText="Sign Up" />
       <Row className="form-page-wrapper">
-        <Col md={6} lg={8} className="d-none d-md-block">
+        <Col md={6} lg={8} className="d-none d-md-block ">
           <ThinkingAbout />
         </Col>
         <Col md={6} lg={4}>

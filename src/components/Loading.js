@@ -1,11 +1,13 @@
 import { Spinner } from "react-bootstrap";
 
-export default function Loading() {
+export default function Loading({ height = 200 }) {
+  const test = 400;
   return (
-    <Spinner
-      className="d-block mx-auto spinner-grow-empty-page"
-      animation="grow"
-      size="lg"
-    />
+    <div
+      style={{ height: height }}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <Spinner className="spinner" animation="grow" size="lg" />
+    </div>
   );
 }

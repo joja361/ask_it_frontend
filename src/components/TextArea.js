@@ -1,7 +1,7 @@
 import { Form, InputGroup } from "react-bootstrap";
 import { ErrorMessage, Field } from "formik";
 
-export default function TextArea({ label, name, rows, ...rest }) {
+export default function TextArea({ label, name, rows, placeholder, ...rest }) {
   const inputGroup = (
     <InputGroup hasValidation>
       <Field name={name}>
@@ -10,6 +10,7 @@ export default function TextArea({ label, name, rows, ...rest }) {
             <Form.Control
               as="textarea"
               rows={rows}
+              placeholder={placeholder}
               isInvalid={meta.error && meta.touched}
               {...field}
               {...rest}

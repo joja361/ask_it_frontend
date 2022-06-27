@@ -8,8 +8,9 @@ import QuestionItem from "../components/Questions/QuestionItem";
 import ResponseForm from "../components/Response/ResponseForm";
 import ResponseList from "../components/Response/ResponseList";
 import { authData } from "../store/authSlice";
-import { getQuestion, questionData } from "../store/questionSlice";
-import { getResponses, responseData } from "../store/responseSlice";
+import { getQuestionAndLikes, questionData } from "../store/questionSlice";
+import { getResponsesAndLikes, responseData } from "../store/responseSlice";
+import ErrorPage from "./ErrorPage";
 
 function Question() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function Question() {
   const {
     loading: questionLoading,
     question,
+    likes,
     error: questionError,
   } = useSelector(questionData);
 
@@ -26,36 +28,59 @@ function Question() {
   const {
     loading: responsesLoading,
     responses,
+    likes: responseLikes,
     error: responsesError,
   } = useSelector(responseData);
 
-  const { question: questionText, description, created_at } = question;
+  const {
+    user_id: userId,
+    question: questionText,
+    description,
+    created_at,
+    name,
+    email,
+  } = question;
 
   useEffect(() => {
-    dispatch(getQuestion(questionId));
-    dispatch(getResponses(questionId));
+    dispatch(getQuestionAndLikes(questionId));
+    dispatch(getResponsesAndLikes(questionId));
   }, [dispatch, questionId]);
+
+  if (questionError.message || responsesError.message) {
+    if (questionError.message) {
+      return <ErrorPage message={questionError.message} />;
+    }
+
+    if (responsesError.message) {
+      return <ErrorPage message={responsesError.message} />;
+    }
+  }
 
   const loadingOrQuestion = questionLoading ? (
     <Loading />
   ) : (
     <QuestionItem
+      questionid={questionId}
+      userId={userId}
+      name={name}
+      email={email}
       question={questionText}
       description={description}
       created_at={created_at}
+      likes={likes}
     />
   );
 
   const loadingOrResponses = responsesLoading ? (
     <Loading />
   ) : (
-    <ResponseList responses={responses} />
+    <ResponseList responses={responses} likes={responseLikes} />
   );
 
   return (
     <>
       <NavBar />
-      <Container className="py-3 mx-auto question-wrapper">
+      <Container className="py-3 mx-auto wrapper">
         {loadingOrQuestion}
         {loadingOrResponses}
         {isAuthenticated && <ResponseForm questionId={questionId} />}

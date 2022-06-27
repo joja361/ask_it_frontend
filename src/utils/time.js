@@ -24,3 +24,12 @@ export function timeSince(date) {
   }
   return Math.floor(seconds) + " second";
 }
+
+export function convertDateToUserSince(date) {
+  const created = new Date(date);
+  const userSince = created.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+  return `Member since ${userSince}`;
+}

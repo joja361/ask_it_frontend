@@ -1,44 +1,62 @@
-import { Formik } from "formik";
-import { Button, Form } from "react-bootstrap";
-import * as Yup from "yup";
-import { mainUrl } from "../../utils/axiosInstances";
-import TextArea from "../TextArea";
+import { Col, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { authData } from "../../store/authSlice";
+import Avatar from "../Avatar";
+import ResponseLikeAndDislike from "./ResponseLikeDislike";
+import ResponseTime from "./ResponseTime";
 
-export default function Response({ questionId }) {
-  const initialValues = {
-    response: "",
-  };
+export default function ResponseItem({
+  email,
+  name,
+  response,
+  id,
+  created,
+  likes,
+}) {
+  const { user } = useSelector(authData);
+  const { userId } = user;
 
-  const validationdSchema = Yup.object({
-    response: Yup.string().required("Response is not added"),
-  });
+  let totalLikes = 0;
+  likes.forEach((like) => (totalLikes += like.like_dislike));
 
-  const onSubmit = async (values) => {
-    const { response } = values;
-    try {
-      const data = await mainUrl.post(`/questions/${questionId}`, {
-        response,
-      });
-      console.log(data);
-      return;
-    } catch (error) {
-      console.log(error);
-      // TODO: handleError right way
-    }
-  };
+  const didUserLikeOrDisllikeResponse = likes.filter(
+    (like) => like.user_id === +userId
+  )[0];
+
+  let like = null;
+  let dislike = null;
+
+  if (didUserLikeOrDisllikeResponse) {
+    const likeOrDislike = didUserLikeOrDisllikeResponse.like_dislike;
+    likeOrDislike === 1 && (like = true);
+    likeOrDislike === -1 && (dislike = true);
+  }
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationdSchema}
-      onSubmit={onSubmit}
-    >
-      {({ handleSubmit }) => (
-        <Form onSubmit={handleSubmit}>
-          <TextArea label="Response" name="response" rows={3} />
-          <Button type="submit">Response</Button>
-        </Form>
-      )}
-    </Formik>
+    <Row>
+      <Col xs={3} md={2}>
+        <Row>
+          <div className="d-flex align-items-center justify-content-center">
+            <Avatar size={40} user={email} />
+          </div>
+        </Row>
+        <Row className="py-3">
+          <ResponseLikeAndDislike
+            id={id}
+            totalLikes={totalLikes}
+            like={like}
+            dislike={dislike}
+          />
+        </Row>
+      </Col>
+      <Col xs={9} md={10}>
+        <Row>
+          <ResponseTime created={created} />
+        </Row>
+        <Row>
+          <p className="response pt-1">{response}</p>
+        </Row>
+      </Col>
+    </Row>
   );
 }

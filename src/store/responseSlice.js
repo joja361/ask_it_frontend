@@ -4,7 +4,8 @@ import { mainUrl } from "../utils/axiosInstances";
 const initialState = {
   loading: false,
   responses: [],
-  error: "",
+  likes: [],
+  error: {},
 };
 
 const responseSlice = createSlice({
@@ -12,19 +13,25 @@ const responseSlice = createSlice({
   initialState,
   reducers: {
     fetchResponsesBegin(state) {
-      return { ...state, loading: true, error: "" };
+      return { ...state, loading: true, error: {} };
     },
     fetchResponsesSuccess(state, action) {
-      return { ...state, loading: false, responses: action.payload };
+      const { responses, likes } = action.payload;
+      return { ...state, loading: false, responses: responses, likes: likes };
     },
     fetchResponsesFailure(state, action) {
       return { ...state, loading: false, error: action.payload };
     },
     createResponseBegin(state) {
-      return { ...state, loading: true, error: "" };
+      return { ...state, loading: true, error: {} };
     },
     createResponseSuccess(state, action) {
-      return { ...state };
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: false,
+        responses: [...state.responses, action.payload],
+      };
     },
     createResponseFailure(state, action) {
       return { ...state, loading: false, error: action.payload };
@@ -45,31 +52,42 @@ export const {
 
 export const responseData = (store) => store.responsesStore;
 
-export const getResponses = (questionId) => async (dispatch) => {
+export const getResponsesAndLikes = (questionId) => async (dispatch) => {
   dispatch(fetchResponsesBegin());
   try {
-    const { data } = await mainUrl(`/questions/${questionId}/responses`);
-    dispatch(fetchResponsesSuccess(data));
-    console.log(data);
+    const { data: responses } = await mainUrl(
+      `/questions/${questionId}/responses`
+    );
+    const { data: likes } = await mainUrl(
+      `/questions/${questionId}/responses/likes`
+    );
+    dispatch(fetchResponsesSuccess({ responses, likes }));
   } catch (error) {
-    console.log(error);
-    // TODO: error handeling
+    const { data, status } = error.response;
+    const { message } = data;
+    dispatch(fetchResponsesFailure({ status, message }));
   }
 };
 
 export const createResponse = (questionId, response) => async (dispatch) => {
   dispatch(createResponseBegin());
   try {
-    const { status } = await mainUrl.post(`/questions/${questionId}`, {
-      response,
-    });
+    const { data: responseId, status } = await mainUrl.post(
+      `/questions/${questionId}`,
+      {
+        response,
+      }
+    );
     if (status === 200) {
-      //CHECK THIS UX
-      dispatch(createResponseSuccess());
-      dispatch(getResponses(questionId));
+      const { data: response } = await mainUrl(
+        `/questions/${questionId}/responses/${responseId}`
+      );
+
+      dispatch(createResponseSuccess(response[0]));
     }
   } catch (error) {
-    console.log(error);
-    // TODO: error handeling
+    const { data, status } = error.response;
+    const { message } = data;
+    dispatch(createResponseFailure({ status, message }));
   }
 };

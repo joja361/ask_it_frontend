@@ -1,9 +1,9 @@
-import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { logo } from "../icons/logo";
 import { authData, logout } from "../store/authSlice";
 import Avatar from "./Avatar";
-import Logo from "./ImagesSvg/Logo";
 
 function NavBar() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function NavBar() {
   };
 
   return (
-    <Navbar className="p-0 fixed-top" expand="sm">
+    <Navbar className="p-0 fixed-top align-items-center" expand="sm">
       <Container>
         <Navbar.Brand>
           <Link
@@ -26,27 +26,31 @@ function NavBar() {
             className="pe-3"
             onClick={() => window.location.href("/")}
           >
-            <Logo />
+            {logo}
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar" />
         {!isAuthenticated && (
-          <Link to={"/login"} className="btn btn-outline-primary">
+          <Link to={"/login"} className="btn btn-outline-primary ">
             Login
           </Link>
         )}
         {isAuthenticated && (
           <Navbar.Collapse id="navbar">
             <Nav className="me-auto">
-              <Nav.Link as={NavLink} to={`/user/${userId}?tab=myQuestions`}>
+              <Nav.Link as={NavLink} to={`/questions/user/${userId}`}>
                 My Questions
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/my-profile" className="d-sm-none">
+              <Nav.Link
+                as={NavLink}
+                to={`/user/${userId}`}
+                className="d-sm-none"
+              >
                 My Profile
               </Nav.Link>
               <Nav.Link
                 as={NavLink}
-                to="/my-profile"
+                to="/"
                 className="d-sm-none"
                 onClick={handleLogOut}
               >
@@ -63,8 +67,8 @@ function NavBar() {
                 title={<Avatar user={email} useFor="navbar" />}
                 id="nav-dropdown"
               >
-                <NavDropdown.Item as={NavLink} to="/my-profile">
-                  My Profile
+                <NavDropdown.Item as={NavLink} to={`/user/${userId}`}>
+                  Profile
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={handleLogOut}>
                   Log Out

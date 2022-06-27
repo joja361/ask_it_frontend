@@ -4,7 +4,8 @@ import { mainUrl } from "../utils/axiosInstances";
 const initialState = {
   loading: false,
   question: {},
-  error: "",
+  likes: [],
+  error: {},
 };
 
 const questionSlice = createSlice({
@@ -12,10 +13,11 @@ const questionSlice = createSlice({
   initialState,
   reducers: {
     fetchQuestionBegin(state) {
-      return { ...state, loading: true, error: "" };
+      return { ...state, loading: true, error: {} };
     },
     fetchQuestionSuccess(state, action) {
-      return { ...state, loading: false, question: action.payload };
+      const { question, likes } = action.payload;
+      return { ...state, loading: false, question: question, likes: likes };
     },
     fetchQuestionFailure(state, action) {
       return { ...state, loading: false, error: action.payload };
@@ -33,13 +35,18 @@ export const {
 
 export const questionData = (store) => store.questionStore;
 
-export const getQuestion = (questionId) => async (dispatch) => {
+export const getQuestionAndLikes = (questionId) => async (dispatch) => {
   dispatch(fetchQuestionBegin());
   try {
-    const { data } = await mainUrl(`/questions/${questionId}`);
-    return dispatch(fetchQuestionSuccess(data[0]));
-  } catch (err) {
-    console.log(err);
-    dispatch(fetchQuestionFailure());
+    const questionDetail = mainUrl(`/questions/${questionId}`);
+    const questionLikes = mainUrl(`/questions/${questionId}/likes`);
+    const questionAndLikes = await Promise.all([questionDetail, questionLikes]);
+    const [{ data: question }, { data: likes }] = questionAndLikes;
+
+    return dispatch(fetchQuestionSuccess({ question, likes }));
+  } catch (error) {
+    const { data, status } = error.response;
+    const { message } = data;
+    dispatch(fetchQuestionFailure({ status, message }));
   }
 };

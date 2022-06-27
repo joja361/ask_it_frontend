@@ -1,17 +1,23 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./authSlice";
+import { hotQuestionsReducer } from "./hotQuestionsSlice";
 import { myQuestionReducer } from "./myQuestionsSlice";
 import { questionReducer } from "./questionSlice";
 import { questionsReducer } from "./questionsSlice";
 import { responsesReducer } from "./responseSlice";
+import { topUsersReducer } from "./topUsersSlice";
 import { totaNumOfQuestionsReducer } from "./totalNumOfQuestions";
+import { userReducer } from "./userSlice";
 
 const combinedReducers = combineReducers({
   authStore: authReducer,
+  userStore: userReducer,
+  topUsersStore: topUsersReducer,
   questionsStore: questionsReducer,
   questionStore: questionReducer,
-  totaNumOfQuestions: totaNumOfQuestionsReducer,
+  hotQuestionStore: hotQuestionsReducer,
   myQuestionsStore: myQuestionReducer,
+  totaNumOfQuestions: totaNumOfQuestionsReducer,
   responsesStore: responsesReducer,
 });
 

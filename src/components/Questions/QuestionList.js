@@ -2,7 +2,7 @@ import { totalNumOfQuestionsData } from "../../store/totalNumOfQuestions";
 import QuestionItem from "./QuestionItem";
 import { useSelector } from "react-redux";
 
-function QuestionList({ questions }) {
+export default function QuestionList({ questions, likes }) {
   const { loadingTotalQuestions, totalQuestions } = useSelector(
     totalNumOfQuestionsData
   );
@@ -13,18 +13,32 @@ function QuestionList({ questions }) {
   return (
     <>
       {questions.map((questionData, i) => {
-        const { id, name, email, question, description, created_at } =
-          questionData;
+        const {
+          user_id: userId,
+          question_id: questionId,
+          name,
+          email,
+          question,
+          description,
+          created_at,
+        } = questionData;
+
+        const questionLikesOrDislikes = likes.filter(
+          (item) => item.question_id === +questionId
+        );
+
         return (
-          <div key={id} className="border-bottom py-2 question-item">
+          <div key={questionId} className="border-bottom pt-3">
             <QuestionItem
-              id={id}
+              questionId={questionId}
+              userId={userId}
               name={name}
               email={email}
               question={question}
               description={description}
               created_at={created_at}
               list={true}
+              likes={questionLikesOrDislikes}
             />
           </div>
         );
@@ -32,5 +46,3 @@ function QuestionList({ questions }) {
     </>
   );
 }
-
-export default QuestionList;
