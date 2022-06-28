@@ -462,5 +462,11 @@ body {
     z-index: 1040;
     padding: 2rem;
     background-color: white;
+
+    &-header {
+      font-size: 1.8rem;
+      margin-top: 7px;
+      font-weight: 400;
+    }
   }
 }

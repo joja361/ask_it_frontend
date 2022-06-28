@@ -1,4 +1,5 @@
 import { Formik } from "formik";
+import { useEffect } from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -35,13 +36,19 @@ function Signup() {
   const onSubmit = async (values) => {
     const { email, password, confirmPassword, name } = values;
     try {
-      // TODO: Change this await
-      await dispatch(signupUser(email, password, confirmPassword, name));
-      return navigate("/login");
+      dispatch(signupUser(email, password, confirmPassword, name));
     } catch (err) {
       console.log(err);
     }
   };
+
+  console.log(error.signup);
+
+  useEffect(() => {
+    if (!loading && error.signup === "") {
+      return navigate("/login");
+    }
+  }, [loading, error]);
 
   return (
     <>

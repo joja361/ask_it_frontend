@@ -10,7 +10,7 @@ export default function ChangePasswordModal({ handleModal }) {
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <ChangePasswordContent />,
+        <ChangePasswordContent handleModal={handleModal} />,
         document.getElementById("modal-root")
       )}
     </>

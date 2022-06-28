@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import LoginButton from "../components//Buttons/LoginButton";
 import ThinkingAbout from "../components/ImagesSvg/ThinkingAbout";
-// import ThinkingAbout from "../components/ImagesSvg/ThinkingAbout";
 import InputField from "../components/InputField";
 import NavAuth from "../components/NavAuth";
 import { authData, loginUser } from "../store/authSlice";

@@ -8,10 +8,7 @@ let isAuth = Boolean(token);
 const initialState = {
   loading: false,
   user: { email, userId },
-  error: {
-    login: "",
-    signup: "",
-  },
+  error: {},
   isAuthenticated: isAuth,
 };
 
@@ -20,10 +17,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setLoading(state) {
-      return { ...state, loading: true };
+      return {
+        ...state,
+        loading: true,
+        error: {},
+      };
     },
     signup(state) {
-      return { ...state, loading: false };
+      return { ...state, loading: false, error: { signup: "" } };
     },
     login(state, action) {
       return {
@@ -37,6 +38,7 @@ const authSlice = createSlice({
       deleteUserData();
       return { ...state, loading: false, isAuthenticated: false };
     },
+
     setError(state, action) {
       return {
         ...state,
@@ -65,16 +67,14 @@ export const signupUser =
         name,
       });
       dispatch(signup());
-      return Promise.resolve(); //TODO: check this
-    } catch (err) {
+    } catch (error) {
       dispatch(
         setError({
           error: {
-            signup: err.response.data.message,
+            signup: error.response.data.message,
           },
         })
       );
-      return Promise.reject();
     }
   };
 
@@ -87,15 +87,33 @@ export const loginUser = (loginEmail, password) => async (dispatch) => {
     });
     const { userId, token, email, name } = data;
     saveUserData(token, email, userId);
-    return dispatch(login({ email, name, userId }));
-  } catch (err) {
-    console.log(err);
+    dispatch(login({ email, name, userId }));
+  } catch (error) {
     dispatch(
       setError({
         error: {
-          login: err.response?.data.message,
+          login: error.response?.data.message,
         },
       })
     );
   }
 };
+
+export const resetPassword =
+  (userId, oldPassword, newPassword) => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+      await mainUrl.put("/auth/reset-password", {
+        userId,
+        oldPassword,
+        newPassword,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setError({
+          resetPasswordError: error.response?.data.message,
+        })
+      );
+    }
+  };
