@@ -27,6 +27,7 @@ function Question() {
 
   const {
     loading: responsesLoading,
+    loadingOnCreate,
     responses,
     likes: responseLikes,
     error: responsesError,
@@ -56,35 +57,40 @@ function Question() {
     }
   }
 
-  const loadingOrQuestion = questionLoading ? (
-    <Loading />
-  ) : (
-    <QuestionItem
-      questionid={questionId}
-      userId={userId}
-      name={name}
-      email={email}
-      question={questionText}
-      description={description}
-      created_at={created_at}
-      likes={likes}
-    />
-  );
+  const responseForm = () => {
+    if (isAuthenticated) {
+      if (loadingOnCreate) {
+        return <Loading />;
+      } else {
+        return <ResponseForm questionId={questionId} />;
+      }
+    }
+  };
 
-  const loadingOrResponses = responsesLoading ? (
-    <Loading />
-  ) : (
-    <ResponseList responses={responses} likes={responseLikes} />
-  );
+  const loadingOrData =
+    questionLoading || responsesLoading ? (
+      <Loading />
+    ) : (
+      <>
+        <QuestionItem
+          questionid={questionId}
+          userId={userId}
+          name={name}
+          email={email}
+          question={questionText}
+          description={description}
+          created_at={created_at}
+          likes={likes}
+        />
+        <ResponseList responses={responses} likes={responseLikes} />
+        {responseForm()}
+      </>
+    );
 
   return (
     <>
       <NavBar />
-      <Container className="py-3 mx-auto wrapper">
-        {loadingOrQuestion}
-        {loadingOrResponses}
-        {isAuthenticated && <ResponseForm questionId={questionId} />}
-      </Container>
+      <Container className="py-3 mx-auto wrapper">{loadingOrData}</Container>
     </>
   );
 }

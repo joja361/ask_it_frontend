@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import Avatar from "../components/Avatar";
+import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import NavBar from "../components/NavBar";
-import ProfileStats from "../components/ProfileStats";
+import ProfileHeader from "../components/Profile/ProfileHeader";
+import ProfileQuestions from "../components/Profile/ProfileQuestions";
+import ProfileStats from "../components/Profile/ProfileStats";
 import { getUser, usersData } from "../store/userSlice";
-import { convertDateToUserSince } from "../utils/time";
 import ErrorPage from "./ErrorPage";
 
 export default function Profile() {
   const { userId } = useParams();
   const dispatch = useDispatch();
   const { loading, user, hotQuestions, error } = useSelector(usersData);
-  const [openModal, setOpenModal] = useState(false);
 
   const {
     name,
@@ -25,8 +24,6 @@ export default function Profile() {
     total_responses: totalResponses,
     total_response_likes: totalResponseLikes,
   } = user;
-
-  const userSince = convertDateToUserSince(createdAt);
 
   useEffect(() => {
     dispatch(getUser(userId));
@@ -44,36 +41,19 @@ export default function Profile() {
     <>
       <NavBar />
       <Container className="mx-auto wrapper">
-        <div className="d-flex justify-content-between">
-          <div className="profile">
-            {email && <Avatar user={email} size={200} />}
-            <h1 className="text-center profile-name">{name || email}</h1>
-          </div>
-          <Button variant="outline-primary">Change Password</Button>
-        </div>
-        <p className="profile-user-since">{userSince}</p>
+        <ProfileHeader
+          createdAt={createdAt}
+          email={email}
+          name={name}
+          id={userId}
+        />
         <ProfileStats
           totalQuestions={totalQuestions}
           totalResponses={totalResponses}
           totalQuestionLikes={totalQuestionLikes}
           totalResponseLikes={totalResponseLikes}
         />
-        <h4 className="profile-hot-questions-header">
-          questions from {name || email}
-        </h4>
-        {hotQuestions.map((question) => {
-          const { id: questionId, question: hotQuestion } = question;
-          return (
-            <div key={questionId}>
-              <Link
-                className="profile-hot-questions-text"
-                to={`/questions/${questionId}`}
-              >
-                {hotQuestion}
-              </Link>
-            </div>
-          );
-        })}
+        <ProfileQuestions questions={hotQuestions} user={name || email} />
       </Container>
     </>
   );

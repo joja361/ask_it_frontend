@@ -442,3 +442,25 @@ body {
     text-decoration: none;
   }
 }
+
+.modal {
+  &-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1031;
+    background: rgba(0, 0, 0, 0.75);
+  }
+
+  &-content {
+    position: fixed;
+    width: 400px;
+    height: fit-content;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 20vh auto;
+    z-index: 1040;
+    padding: 2rem;
+    background-color: white;
+  }
+}

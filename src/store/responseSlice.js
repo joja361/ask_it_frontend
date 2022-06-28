@@ -3,6 +3,7 @@ import { mainUrl } from "../utils/axiosInstances";
 
 const initialState = {
   loading: false,
+  loadingOnCreate: false,
   responses: [],
   likes: [],
   error: {},
@@ -23,18 +24,18 @@ const responseSlice = createSlice({
       return { ...state, loading: false, error: action.payload };
     },
     createResponseBegin(state) {
-      return { ...state, loading: true, error: {} };
+      return { ...state, loadingOnCreate: true, error: {} };
     },
     createResponseSuccess(state, action) {
       console.log(action.payload);
       return {
         ...state,
-        loading: false,
+        loadingOnCreate: false,
         responses: [...state.responses, action.payload],
       };
     },
     createResponseFailure(state, action) {
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loadingOnCreate: false, error: action.payload };
     },
   },
 });
