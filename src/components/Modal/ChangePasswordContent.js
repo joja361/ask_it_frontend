@@ -2,7 +2,6 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { authData } from "../../store/authSlice";
 import { mainUrl } from "../../utils/axiosInstances";

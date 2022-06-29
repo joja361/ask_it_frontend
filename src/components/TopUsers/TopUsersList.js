@@ -1,6 +1,6 @@
-import TopUserItem from "./TopUserItem";
-import { Row, Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Loading from "../Loading";
+import TopUserItem from "./TopUserItem";
 
 export default function TopUsersList({ topUsers, loading }) {
   return (

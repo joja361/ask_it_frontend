@@ -1,5 +1,5 @@
-import { Form, InputGroup } from "react-bootstrap";
 import { ErrorMessage, Field } from "formik";
+import { Form, InputGroup } from "react-bootstrap";
 
 export default function TextArea({ label, name, rows, placeholder, ...rest }) {
   const inputGroup = (

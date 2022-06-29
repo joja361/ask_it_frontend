@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoCaretDownSharp, IoCaretUpSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { authData } from "../../store/authSlice";

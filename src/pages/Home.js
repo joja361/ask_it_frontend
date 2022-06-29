@@ -10,7 +10,7 @@ import QuestionList from "../components/Questions/QuestionList";
 import TopUsersList from "../components/TopUsers/TopUsersList";
 import {
   getHotQuestionsAndLikes,
-  hotQuestionsData,
+  hotQuestionsData
 } from "../store/hotQuestionsSlice";
 import { getQuestionsAndLikes, questionsData } from "../store/questionsSlice";
 import { getTopUsers, topUsersData } from "../store/topUsersSlice";

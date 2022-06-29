@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { authData } from "../../store/authSlice";
 import {
   getTotalNumOfQuestions,
-  totalNumOfQuestionsData,
+  totalNumOfQuestionsData
 } from "../../store/totalNumOfQuestions";
 
 export default function HeaderOfQuestionList({ myQuestions = false }) {

@@ -1,27 +1,3 @@
-/questions?last=20 - treba da nam vrati i question_id kako bi mogli rutirati na bas to pitanje // ZAVRSENO
-
-Nakon sto zavrsimo gore navedeno treba da komponentu Question List updatujemo sa question id umjesto trenutno indexa iz map funkcije // ZAVRSENO
-
-Provjeriti zasto `/questions/${userId}?last=20 ne radi ispravno // ZAVRSENO napravljen novi route '/user/${userId}?last=20
-
-we need to fix backend for getQuestion since somehow that route is also looking for user_id which is not correct, exclude user_id from request // ZAVRSENO
-
-question/id ne treba da bude u privateRoute samo treba da postoji mogucnost dodavanja responsa ukoliko je user auth. //ZAVRSENO
-
-TODO: /questions?last=20 - treba napraviti funkcionalnost sa load more funkcionalnosti, takodjer treba prosiriti stranicu sa ostalim trazenim stvarima // LOAD MORE funkcionalnost zavrsena 
-
-TODO: HOMEPAGE -- errorhandeling need to be done
-
-ne treba se prikazivati button "get more question" ukoliko na serveru nemamo vise pitanja // ZAVRSENO
-
-path moreQuestions for the myQuestions // ZAVRSENO
-
-route /questions/totalQuestion doesn't need Authentication / ZAVRSENO
-
-FIXME: provjeriti kada nismo authenticated zasto imamo 2 loading-a. Ovo imamo jer radimo fetch posebno questiona a posebno response // provjeriti kako pravilno postupiti
-
-TODO: Provjeriti kada se ne kacimo kroz ngrok da li ima request method options i sta to znaci
-
 LINKOVI KORISNI: 
 
 https://undraw.co/search

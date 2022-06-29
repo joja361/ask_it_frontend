@@ -48,7 +48,7 @@ function Signup() {
     if (!loading && error.signup === "") {
       return navigate("/login");
     }
-  }, [loading, error]);
+  }, [loading, error, navigate]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { authData } from "../../store/authSlice";
 import { convertDateToUserSince } from "../../utils/time";
 import Avatar from "../Avatar";

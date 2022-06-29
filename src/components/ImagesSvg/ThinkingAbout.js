@@ -1,5 +1,5 @@
-import image from "../../asset/thinkingabout.svg";
 import { Col } from "react-bootstrap";
+import image from "../../asset/thinkingabout.svg";
 
 function ThinkingAbout() {
   return (

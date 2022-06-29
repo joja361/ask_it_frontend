@@ -1,6 +1,6 @@
+import { useSelector } from "react-redux";
 import { totalNumOfQuestionsData } from "../../store/totalNumOfQuestions";
 import QuestionItem from "./QuestionItem";
-import { useSelector } from "react-redux";
 
 export default function QuestionList({ questions, likes }) {
   const { loadingTotalQuestions, totalQuestions } = useSelector(

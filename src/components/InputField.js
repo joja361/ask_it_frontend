@@ -1,5 +1,5 @@
-import { Form, InputGroup } from "react-bootstrap";
 import { ErrorMessage, Field } from "formik";
+import { Form, InputGroup } from "react-bootstrap";
 
 function InputField({ label, name, type, ...rest }) {
   const inputGroup = (
